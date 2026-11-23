@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10243a">
+<meta name="robots" content="noindex, nofollow">
+<title>施術ログ@</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,"Noto Sans JP",sans-serif;--ink:#12273d;--muted:#4c647a;--line:#d8e3ec;--surface:white;--blue:#0c53a6;--navy:#10243a;--teal:#00786a;--wash:#edf3f8;--red:#a92739}
+*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font-size:16px;line-height:1.55}button,input,select,textarea{font:inherit;color:inherit}button,input,select,textarea,summary{touch-action:manipulation}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #2583dc;outline-offset:2px}button:disabled{opacity:.5;cursor:default}[hidden]{display:none!important}h1,h2,h3,p{margin:0}h1{font-size:clamp(1.35rem,4.8vw,2.15rem);letter-spacing:-.035em;line-height:1.22}h2{font-size:1.25rem}h3{font-size:1.05rem}small,.sub{font-size:.875rem;color:var(--muted)}p+p{margin-top:.55rem}
+.top{background:var(--navy);color:white}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:18px}.wrap{max-width:1152px;margin:auto;padding-inline:clamp(12px,3vw,28px)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{border-radius:10px;width:44px;height:44px;object-fit:contain;flex:none}.top small{color:#c7d8e8}.top button{background:#203c58;color:white;border-color:#557087}.top .mode{font-size:.82rem;white-space:nowrap}
+nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}nav .wrap{display:flex;gap:5px}nav button{border:0;border-radius:0;background:white;color:var(--muted);border-bottom:3px solid transparent;padding-inline:16px;white-space:nowrap}nav button[aria-current]{color:var(--blue);background:#eaf3ff;border-color:var(--blue);font-weight:750}
+main{padding-block:24px 45px}.stack{display:grid;gap:14px}.split,.charts,.tiles{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.panel{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:clamp(13px,2vw,22px);box-shadow:0 3px 12px #10243a09}.panel>*+*{margin-top:12px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.between{justify-content:space-between}.page-title{margin-bottom:2px}#selectedDayTitle{scroll-margin-top:60px}.page-title p{margin-top:3px}.metric{background:#f1f6fc;border-radius:10px;padding:10px 12px;min-width:0}.metric strong{display:block;font-size:clamp(1rem,3.5vw,1.5rem);line-height:1.32;margin-top:4px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.positive{color:var(--teal)}.pill{border-radius:999px;background:#e8f2ff;color:#104f94;font-size:.8rem;font-weight:700;padding:3px 9px;display:inline-block}.pill.off{background:#eef0f3;color:#47596a}.pill.done{background:#ddf4ed;color:#075c51}.pill.store{background:#fff1db;color:#684411}
+button{background:#fff;border:1px solid #afc1d1;border-radius:9px;min-height:44px;padding:7px 12px;font-weight:680}button.primary{background:#0c53a6;color:#fff;border-color:#0c53a6}button.danger{color:var(--red);border-color:#e1a9b1}button.compact{padding-inline:8px}button:hover:not(:disabled){filter:brightness(.96)}
+label.field{display:grid;gap:4px;align-content:start;font-size:.9rem;font-weight:680;min-width:0}input:not([type=checkbox]),select,textarea{display:block;width:100%;min-width:0;max-width:100%;min-height:44px;border:1px solid #afc1d1;border-radius:8px;background:white;padding:7px 9px;font-size:16px}textarea{resize:vertical}input[type=date],input[type=time],input[type=month]{padding-inline:6px}fieldset{margin:0;padding:0;border:0;min-width:0}legend{font-weight:700;margin-bottom:5px}.filter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:end}
+.banner{padding:12px 14px;border-radius:10px;background:#fff2d7;color:#5c410a;border:1px solid #e9c983}.note{background:#edf5ff;border-left:4px solid #3181cc;padding:9px 12px;border-radius:4px;color:#25496c;font-size:.9rem}.error{color:var(--red);font-weight:700}.empty{color:var(--muted);background:#f4f7fa;border-radius:8px;padding:10px;font-size:.9rem}.cal-layout{grid-template-columns:minmax(0,1.43fr) minmax(0,1fr);align-items:start}.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.weekday{text-align:center;font-size:.85rem;color:var(--muted);font-weight:700}.day{position:relative;min-height:62px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:3px 1px;border-color:#dce6ef;font-variant-numeric:tabular-nums}.day[aria-pressed=true]{border:2px solid var(--blue);background:#e8f2ff;color:#08488d}.day.today:not([aria-pressed=true]){box-shadow:inset 0 0 0 1px #6396c9}.dots{display:flex;justify-content:center;gap:2px;min-height:6px}.dot{height:6px;width:6px;border-radius:20px;background:#347ccc}.dot.done{background:#088575}.dot.off{background:#77899b}.dot.store{background:#bf7b13}.legend{display:flex;gap:10px;flex-wrap:wrap}.legend span{display:flex;align-items:center;gap:4px}.record{border:1px solid var(--line);border-radius:10px;padding:10px;min-width:0}.record>*+*{margin-top:7px}.record strong{overflow-wrap:anywhere}.entries{display:grid;gap:10px}
+.analysis-hero{background:linear-gradient(118deg,#10243a,#174c68);border:0;color:white}.analysis-hero h2{font-size:1.5rem}.analysis-hero .sub{color:#d1e0ec}.analysis-hero .metric{background:#ffffff13;border:1px solid #ffffff36}.analysis-hero .metric .sub{color:#e1eef7}.bars{display:grid;gap:8px}.bar{display:grid;grid-template-columns:2.2rem minmax(0,1fr) minmax(4.7rem,auto);gap:6px;align-items:center;font-size:.86rem}.bar b{text-align:right;font-variant-numeric:tabular-nums}.track{height:9px;border-radius:20px;background:#e8eff6;overflow:hidden}.fill{height:100%;background:#1768b8;border-radius:20px}.fill.teal{background:#007e70}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.87rem;font-variant-numeric:tabular-nums}th,td{padding:8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f2f6fa}td.num,th.num{text-align:right;white-space:nowrap}ol,ul{margin-block:8px;padding-left:1.5rem}li+li{margin-top:6px}.rank li::marker{color:#0c53a6;font-weight:750}.local-status{font-size:.84rem;margin-top:12px;color:var(--muted)}#toast:not(:empty){position:fixed;bottom:80px;right:12px;z-index:8;max-width:calc(100% - 24px);background:#10243a;color:white;padding:10px 15px;border-radius:9px;box-shadow:0 2px 12px #12273d55;pointer-events:none}
+dialog{width:min(640px,calc(100% - 24px));max-height:calc(100dvh - 30px);padding:0;border:1px solid var(--line);border-radius:15px;color:var(--ink)}dialog::backdrop{background:#0c2136aa}.dialog-head,.dialog-foot{position:sticky;background:white;z-index:1;padding:10px 15px}.dialog-head{top:0;border-bottom:1px solid var(--line)}.dialog-foot{bottom:0;border-top:1px solid var(--line)}.dialog-body{padding:15px}.check{display:inline-flex;align-items:center;gap:4px;padding:6px;min-height:44px;border:1px solid var(--line);border-radius:8px}input[type=checkbox]{width:18px;height:18px}summary{cursor:pointer;font-weight:720;min-height:44px;padding:9px 0}details[open]>summary{margin-bottom:5px}.hours{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.detail-list{display:grid;gap:8px}
+@media(max-width:760px){.top .wrap{padding-block:12px}.top .wrap,.brand{gap:8px}.top button{font-size:.8rem;padding-inline:7px}.top h1{font-size:clamp(1rem,4.4vw,1.55rem)}.brand-mark{width:34px;height:34px}.cal-layout,.charts,.settings-grid{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.day{min-height:48px}main{padding-block:14px calc(88px + env(safe-area-inset-bottom))}nav{position:fixed;top:auto;bottom:0;left:0;width:100%;border-top:1px solid var(--line);border-bottom:0;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -3px 14px #10243a15}nav .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-inline:4px;gap:1px}nav button{padding:5px 1px;font-size:.86rem;min-height:58px;border-bottom:0;border-top:3px solid transparent}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:380px){.split:not(.cal-layout){gap:8px}.panel{padding:11px}.cal{gap:2px}.dot{width:5px;height:5px}th,td{padding:6px}}
+.analysis-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.analysis-switch button{min-height:44px;border-color:transparent}.analysis-switch button[aria-pressed="true"]{background:var(--blue);color:#fff}
+.metric .metric-note{display:block;margin-top:5px;color:var(--muted);font-size:.85rem}.hourly-metrics .metric{display:flex;flex-direction:column}.hourly-metrics .metric strong{margin-top:auto;padding-top:4px}
+.pay-lines{margin:0}.pay-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);align-items:center}
+.pay-line dd{margin:0;text-align:right;font-weight:730;font-variant-numeric:tabular-nums;white-space:nowrap}.pay-line.deduction dd{color:var(--red)}.pay-line.total{font-weight:750;border-bottom:0}.pay-line.total dd{color:var(--blue);font-size:1.2rem}
+.page-title-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.page-title-row .page-title{min-width:0}
+.ad-slot{display:flex;align-items:center;justify-content:center;min-width:0;border:1px dashed var(--line);border-radius:8px;background:#f9fafc;color:var(--muted);font-size:.75rem}
+.ad-slot--analysis{flex:0 1 72px;min-height:30px;padding:3px 5px}
+.ad-slot--export{width:100%;min-height:68px;padding:8px}
+.hourly-label{margin-top:12px}
+.pay-line.subtotal{font-weight:700}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="brand"><img class="brand-mark" id="appIcon" src="data:image/png;base64,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" alt="" width="44" height="44"><div><h1 id="appTitle"></h1><small>モニター向け試作版 Ver.1.3</small></div></div><button id="sampleToggle" class="mode" type="button">サンプルを試す</button></div></header>
+<nav aria-label="メインメニュー"><div class="wrap">
+<button data-nav="calendar">カレンダー</button><button data-nav="analysis">分析</button><button data-nav="export">データ出力</button><button data-nav="settings">設定</button>
+</div></nav>
+<main class="wrap"><div id="modeBanner" class="banner" hidden></div><div id="app" class="stack"></div><p id="storageStatus" class="local-status"></p></main>
+<p id="toast" role="status" aria-live="polite"></p>
+<dialog id="editor" aria-labelledby="editorTitle"><form id="editorForm"><div class="dialog-head row between"><h2 id="editorTitle"></h2><button type="button" id="closeEditor" aria-label="編集を閉じる">閉じる</button></div><div id="editorBody" class="dialog-body stack"></div><div class="dialog-foot stack"><p id="formError" class="error" role="alert" hidden></p><div class="row between"><button id="deleteRecord" class="danger" type="button" hidden>削除</button><button class="primary" type="submit" id="saveRecord">保存</button></div></div></form></dialog>
+<template id="guide"><details><summary>使い方・試作の制限</summary><div class="stack">
+<p class="note">GalaxyではHTMLをダウンロードし、「マイファイル」のダウンロードから開きます。アプリを選べる場合はブラウザを選択します。同じブラウザ・同じファイルで開き直してください。</p>
+<ol><li>右上の「サンプルを試す」で、架空の2店舗・2か月分の入力と分析を確認できます。「実データに戻る」で自分の記録に切り替わります。</li><li>設定で店舗名、対象月の施設利用料率、指名料・控除を設定します。</li><li>カレンダーの日付を選び、出勤予定・勤務実績・施術・店舗データを登録します。休日は予定と実績にそれぞれ登録できます。各フォームの保存・削除はその場で端末内に反映されます。</li><li>分析で対象日、期間、店舗を選びます。データ出力で同じ条件のCSVを保存できます。設定でJSONバックアップを作成・復元できます。</li></ol>
+<p class="note">勤務は同じ日・店舗につき予定と実績が各1枠。日またぎは出勤日で集計します。待機時間は勤務時間（休憩を除く）から施術時間を引いた目安です。施術未入力の出勤日は、稼働率・待機の集計対象外です。施術ゼロの日は基本入力で0を保存してください。</p>
+<p class="note">時間帯の分析は詳細入力の来店時刻と手入力した店舗の時間帯別来店客数を集計します。勤務時間帯の提案は来店が記録された時間帯の傾向を表示します。設定変更は過去の報酬目安にも反映されます。</p>
+<p class="note">端末間の同期、予約連携、既存の施術ログからの取込は対象外です。ブラウザやHTMLファイルの置き場所を変えると保存済みデータを読み込めない場合があります。移動前にJSONを保存してください。自由メモにはお客様を特定できる情報を入力しないでください。CSVには自由メモを含めません。</p>
+</div></details>
+<details><summary>Ver.1.1の追加機能</summary><div class="stack">
+<p>来店・出勤・退勤時刻は「1430」のように入力すると「14:30」になります。来店時刻は空欄でも保存できます。オプションは設定で追加し、施術の詳細入力で複数選べます。</p>
+<p>オプションの名前・金額は施術ごとに保存します。集計は分析の「オプション販売」と勤務CSVで確認できます。店舗売上・来店客数は確認できたものだけ入力できます。</p>
+<p>旧試作のJSONを復元できます。旧版の報酬率は100%から引いて施設利用料率に換算します。</p>
+</div></details>
+<details><summary>Ver.1.3の変更</summary><p>時間あたりの報酬は施術分で計算し、指名とオプションは報酬の内訳に表示します。稼働率は施術と勤務の合計時間から計算します。</p></details>
+<details><summary>Ver.1.2の変更</summary><p>分析ページ上部で「自分の分析」と「店舗分析」を切り替えられます。勤務の指標は控除前の金額を主表示にし、控除後の金額も表示します。</p></details>
+<details><summary>試用後の改善チェックリスト</summary><div class="stack"><ul>
+<li>スマホで勤務を1日分入力・修正するまで、何秒かかった？ 迷った項目は？</li>
+<li>基本入力と詳細入力のどちらを普段使いしたい？ 併用したい場面は？</li>
+<li>施術売上・基本料金・報酬目安の違いが画面から伝わる？ 精算明細との差は？</li>
+<li>予定と実績、休日と未入力日、複数店舗の切り替えを見分けられる？</li>
+<li>店舗データのうち、無理なく毎日記録できる項目は？</li>
+<li>次のシフトを決めるときに見たい数字はどれ？ 不足していた根拠は？</li>
+<li>Galaxyでファイルを開き直し、データの保持、CSV保存、JSON復元までできた？</li>
+</ul></div></details>
+<details><summary>Ver.1の検証結果</summary><ul>
+<li>Chromeで、予定・勤務実績の登録／編集／削除、休日表示、曜日別の一括登録と既存予定のスキップを確認。</li>
+<li>基本・詳細の切り替えで二重計上がないこと、店舗データと指名3区分の集計、期間・店舗の絞り込みを確認。</li>
+<li>施術売上7,200円・報酬率70%・個人指名250円・性別指名100円・施術2時間・控除320円／時で、報酬目安4,750円になることを確認。</li>
+<li>サンプルのグラフと提案、日別・時間帯別CSV、JSON保存と復元、不正JSONを読み込んだ後のデータ保持を確認。</li>
+<li>ブラウザ再読み込み後のデータ保持と、360px幅での下部ナビ・横はみ出し・主要フォーム操作を確認。Galaxy S25実機は未確認。</li>
+</ul></details></template>
+<script>
+'use strict';
+
+const $ = id => document.getElementById(id);
+$('appTitle').textContent = document.title;
+for (const rel of ['icon','apple-touch-icon']) {
+  const link=document.createElement('link');
+  link.rel=rel;
+  link.href=$('appIcon').src;
+  document.head.append(link);
+}
+if (location.protocol==='https:' || location.protocol==='http:') {
+  const manifest=document.createElement('link');
+  manifest.rel='manifest';
+  manifest.href='./manifest.webmanifest';
+  document.head.append(manifest);
+}
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => (
+  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+));
+const KEY = 'bside-rirakuru-analysis-v1';
+const days = ['日','月','火','水','木','金','土'];
+const kinds = ['free','personal','gender'];
+const categories = {free:'フリー', personal:'個人指名', gender:'性別指名'};
+const hourLabel = hour => String(hour).padStart(2,'0') + '時台';
+const hours = Array.from({length:24}, (_, hour) => hour);
+const sum = (items, fn) => items.reduce((total, item) => total + fn(item), 0);
+const mean = (items, fn) => items.length ? sum(items, fn) / items.length : null;
+const ratio = (n,d) => d > 0 ? n/d : null;
+const format = n => Math.round(n).toLocaleString('ja-JP');
+const yen = n => n == null ? '—' : format(n) + '円';
+const qty = n => n == null ? '—' : format(n) + '件';
+const pct = n => n == null ? '—' : (n * 100).toFixed(1) + '%';
+const duration = n => n == null ? '—' : (n / 60).toFixed(1) + 'h';
+const headcount = n => n == null ? '—' : n.toFixed(1) + '人';
+const dayKey = date => date.toISOString().slice(0,10);
+const dateOf = text => new Date(text + 'T00:00:00Z');
+const offset = (text, diff) => { const date = dateOf(text); date.setUTCDate(date.getUTCDate() + diff); return dayKey(date); };
+const weekday = text => dateOf(text).getUTCDay();
+const monthOffset = (month, delta) => {
+  const date = dateOf(month + '-01');
+  date.setUTCMonth(date.getUTCMonth() + delta);
+  return dayKey(date).slice(0,7);
+};
+const monthEnd = month => offset(monthOffset(month,1) + '-01', -1);
+const today = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const keyFor = (date, store) => date + '|' + store;
+const byKey = (map, date, store) => map[keyFor(date,store)];
+const validDate = date => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+  date >= '1900-01-01' && date <= '2199-12-31' && !isNaN(+dateOf(date)) && dayKey(dateOf(date)) === date;
+const validMonth = month => validDate(month + '-01');
+const clockOK = value => typeof value === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+const minuteOf = value => Number(value.slice(0,2)) * 60 + Number(value.slice(3));
+const shiftLength = shift => (minuteOf(shift.end) - minuteOf(shift.start) + 1440) % 1440;
+const netMinutes = shift => shiftLength(shift) - shift.breaks;
+const absoluteMinute = (date,clock) => +dateOf(date)/60000 + minuteOf(clock);
+const clockIntervals = shift => {
+  const start = minuteOf(shift.start), end = start + shiftLength(shift);
+  return end <= 1440 ? [[start,end]] : [[start,1440],[0,end-1440]];
+};
+const id = () => crypto.randomUUID?.() ?? ('s' + Date.now().toString(36) + Math.random().toString(36).slice(2,10));
+const clone = value => JSON.parse(JSON.stringify(value));
+const MATTRESS = Object.freeze({id:'premium-mattress',name:'プレミアムマットレス',price:330,share:330});
+const PILLOW = Object.freeze({id:'premium-pillow',name:'プレミアムフェイスマクラ',price:220,share:110});
+const defaultOptions = () => [{...MATTRESS},{...PILLOW}];
+const complementRate = rate => Number((100-rate).toFixed(10));
+const initial = () => ({
+  version:2, stores:[{id:'default',name:'店舗A'}],
+  settings:{base:3600, personal:0, gender:100, facility:212, material:108, other:0, target:0, feeRates:{}, options:defaultOptions()},
+  shifts:{}, visits:{}, traffic:{}
+});
+let real = initial(), demo = null, sample = false, storageProblem = '', loadedStorage = null;
+let analysisView='personal';
+let tab = 'calendar', month = today.slice(0,7), selectedDay = today, calendarStore = '';
+let filter = {kind:'month',anchor:today,start:month+'-01',end:monthEnd(month),store:''};
+let editing = null, noticeTimer;
+const data = () => sample ? demo : real;
+const storeName = store => data().stores.find(item => item.id === store)?.name ?? '店舗';
+const currentStores = () => calendarStore ? data().stores.filter(s => s.id === calendarStore) : data().stores;
+const check = (pass, message) => { if (!pass) throw new Error(message); };
+const int = (value, low=0, high=10000000) => Number.isInteger(value) && value >= low && value <= high;
+const obj = value => !!value && typeof value === 'object' && !Array.isArray(value);
+const fromForm = form => Object.fromEntries(new FormData(form));
+const optionalNumber = value => value === '' ? null : Number(value);
+
+const optionValueValid = item => obj(item) && typeof item.name==='string' && item.name.trim() &&
+  item.name.length<=40 && int(item.price) && int(item.share);
+function validateOptions(options) {
+  const ids=new Set();
+  check(Array.isArray(options) && options.every(item=>{
+    if (!optionValueValid(item) || typeof item.id!=='string' || !/^[\w-]{1,70}$/.test(item.id) || ids.has(item.id)) return false;
+    ids.add(item.id);
+    return true;
+  }), 'オプション名・販売価格・報酬を確認してください。');
+}
+function migrate(state) {
+  if (state?.version!==1) return state;
+  check(obj(state.settings) && obj(state.settings.rates) && obj(state.visits) && obj(state.traffic),
+    '旧版の保存データ形式を確認してください。');
+  const next=clone(state), settings=next.settings;
+  const oldOptions=items=>{
+    check(Array.isArray(items) && items.length===3 && items.every(item=>item===null || optionValueValid(item)),
+      '旧版のオプション形式を確認してください。');
+    return items.flatMap((item,index)=>item?[{...item,id:'legacy-option-'+index}]:[]);
+  };
+  settings.feeRates=Object.fromEntries(Object.entries(settings.rates).map(([month,rate])=>{
+    check(Number.isFinite(rate) && rate>=0 && rate<=100,'旧版の報酬率を確認してください。');
+    return [month,complementRate(rate)];
+  }));
+  delete settings.rates;
+  const catalog=Object.hasOwn(settings,'options') ? oldOptions(settings.options) : [{...PILLOW}];
+  const oldMattressIds=new Set(catalog.filter(item=>item.name===MATTRESS.name).map(item=>item.id));
+  settings.options=[{...MATTRESS},...catalog.filter(item=>!oldMattressIds.has(item.id))];
+  for (const record of Object.values(next.visits)) {
+    if (record?.mode!=='detail' || !Array.isArray(record.details)) continue;
+    for (const detail of record.details) {
+      if (!obj(detail) || !Object.hasOwn(detail,'options')) continue;
+      const entries=oldOptions(detail.options);
+      const mattress=entries.find(item=>oldMattressIds.has(item.id) && item.name===MATTRESS.name) ??
+        entries.find(item=>item.name===MATTRESS.name);
+      detail.options=entries.map(item=>item===mattress?{...item,id:MATTRESS.id}:item);
+    }
+  }
+  for (const record of Object.values(next.traffic)) {
+    check(obj(record) && int(record.total,0,100000),'旧版の店舗データを確認してください。');
+    record.sales=null;
+  }
+  next.version=2;
+  return next;
+}
+function summarizeOptions(items) {
+  return {count:items.length, sales:sum(items,item=>item.price), pay:sum(items,item=>item.share)};
+}
+function summarizeOptionsByName(items) {
+  const groups=new Map();
+  for (const item of items) {
+    if (!groups.has(item.name)) groups.set(item.name,[]);
+    groups.get(item.name).push(item);
+  }
+  return [...groups].map(([name,options])=>[name,summarizeOptions(options)]);
+}
+function summary(visit) {
+  if (visit.mode === 'basic') return {...visit.basic, options:[]};
+  return {
+    minutes:sum(visit.details, item => item.minutes), sales:sum(visit.details, item => item.sales),
+    count:visit.details.length, personal:visit.details.filter(item => item.kind === 'personal').length,
+    gender:visit.details.filter(item => item.kind === 'gender').length,
+    options:visit.details.flatMap(item=>item.options??[])
+  };
+}
+function validate(state) {
+  check(obj(state) && state.version === 2 && Array.isArray(state.stores) && state.stores.length &&
+    obj(state.settings) && obj(state.shifts) && obj(state.visits) && obj(state.traffic), 'この試作版のデータ形式ではありません。');
+  const stores = new Set(), names = new Set();
+  for (const store of state.stores) {
+    check(obj(store) && typeof store.id === 'string' && /^[\w-]{1,70}$/.test(store.id) &&
+      typeof store.name === 'string' && store.name.trim() && store.name.length <= 30 &&
+      !stores.has(store.id) && !names.has(store.name), '店舗の名前または識別子が重複しているか、形式が正しくありません。');
+    stores.add(store.id);
+    names.add(store.name);
+  }
+  const settings = state.settings;
+  validateOptions(settings.options);
+  const fixed=settings.options[0];
+  check(fixed?.id===MATTRESS.id && fixed.name===MATTRESS.name && fixed.price===MATTRESS.price && fixed.share===MATTRESS.share,
+    '固定オプションの設定を確認してください。');
+  for (const field of ['base','personal','gender','facility','material','other','target']) {
+    check(int(settings[field]), '報酬設定は0以上の整数で入力してください。');
+  }
+  check(obj(settings.feeRates),'月別施設利用料率が正しくありません。');
+  for (const [period,rate] of Object.entries(settings.feeRates)) {
+    check(validMonth(period) && Number.isFinite(rate) && rate >= 0 && rate <= 100, '施設利用料率は0〜100%で入力してください。');
+  }
+  function coordinates(record, key) {
+    check(obj(record) && validDate(record.date) && stores.has(record.store) &&
+      key === keyFor(record.date,record.store), '記録の日付または店舗が正しくありません。');
+  }
+  const intervals = {plan:[], actual:[]};
+  for (const [key,record] of Object.entries(state.shifts)) {
+    coordinates(record,key);
+    check(record.plan || record.actual, '空の勤務記録があります。');
+    for (const layer of ['plan','actual']) {
+      const shift = record[layer];
+      if (shift == null) continue;
+      check(obj(shift) && ['work','off'].includes(shift.status),'勤務区分が正しくありません。');
+      if (shift.status === 'off') continue;
+      check(clockOK(shift.start) && clockOK(shift.end) && shiftLength(shift)>0 &&
+        int(shift.breaks,0,shiftLength(shift)-1), '出退勤時刻と休憩分数を確認してください。同じ出退勤時刻は登録できません。');
+      const start = absoluteMinute(record.date,shift.start);
+      intervals[layer].push({start,end:start+shiftLength(shift)});
+    }
+  }
+  for (const layer of Object.values(intervals)) {
+    layer.sort((a,b)=>a.start-b.start);
+    check(layer.every((item,i)=>!i || item.start >= layer[i-1].end),'同じ区分の勤務時間が別の勤務枠と重なっています。');
+  }
+  for (const [key,record] of Object.entries(state.visits)) {
+    coordinates(record,key);
+    check(['basic','detail'].includes(record.mode), '施術の入力方法が正しくありません。');
+    if (record.mode === 'detail') {
+      check(Array.isArray(record.details) && record.details.length<=250,'詳細は日・店舗ごとに250件まで登録できます。');
+      for (const visit of record.details) {
+        check(obj(visit) && (visit.time === '' || clockOK(visit.time)) && int(visit.minutes,1,1440) &&
+          int(visit.sales) && kinds.includes(visit.kind) && typeof visit.memo === 'string' &&
+          visit.memo.length<=160,'詳細の施術分数・金額・指名区分を確認してください。');
+        if (Object.hasOwn(visit,'options')) validateOptions(visit.options);
+      }
+    }
+    const total = summary(record);
+    check(obj(total) && int(total.minutes,0,1440) && int(total.count,0,10000) &&
+      int(total.sales,0,100000000) && int(total.personal,0,total.count) && int(total.gender,0,total.count) &&
+      total.count >= total.personal + total.gender &&
+      (total.count > 0 ? total.minutes > 0 : total.minutes === 0 && total.sales === 0),
+      '施術時間・件数・売上を確認してください。施術件数は指名の合計以上にしてください。');
+    const shift = state.shifts[key]?.actual;
+    check(shift?.status !== 'off' || total.count === 0,'施術がある日・店舗の実績は休日に設定できません。');
+    check(shift?.status !== 'work' || total.minutes <= netMinutes(shift),'施術時間が勤務実績の時間（休憩除く）を超えています。');
+  }
+  for (const [key,record] of Object.entries(state.traffic)) {
+    coordinates(record,key);
+    check((record.total===null || int(record.total,0,100000)) && (record.staff===null || int(record.staff,0,10000)) &&
+      (record.sales===null || int(record.sales,0,1000000000)) && obj(record.hours),
+      '店舗売上・来店客数・出勤セラピスト人数を確認してください。');
+    check(record.sales!==null || record.total!==null || record.staff!==null || Object.keys(record.hours).length,
+      '店舗データを1項目以上入力してください。記録を空にする場合は削除できます。');
+    for (const [hour,count] of Object.entries(record.hours)) {
+      check(String(Number(hour)) === hour && int(Number(hour),0,23) && int(count,0,100000),'時間帯別来店客数を確認してください。');
+    }
+    check(record.total===null || sum(Object.values(record.hours), n => n) <= record.total,'時間帯別の来店客数が1日の来店客数を超えています。');
+  }
+}
+try {
+  const stored = localStorage.getItem(KEY);
+  loadedStorage = stored;
+  if (stored) { const candidate = migrate(JSON.parse(stored)); validate(candidate); real = candidate; }
+} catch {
+  storageProblem = '端末の保存データを開けませんでした。JSONの復元をお試しください。';
+}
+function commit(next, recover = false) {
+  validate(next);
+  if (sample) { demo = next; return; }
+  check(!storageProblem || recover,'既存の保存データが読み取れません。設定から正常なJSONを復元してください。');
+  let current;
+  try { current = localStorage.getItem(KEY); }
+  catch { throw new Error('端末の保存領域を開けません。ブラウザの保存設定を確認してください。'); }
+  check(current===loadedStorage,'別の画面でデータが更新されました。開き直して最新の記録を読み込んでください。');
+  const serialized=JSON.stringify(next);
+  try { localStorage.setItem(KEY,serialized); }
+  catch { throw new Error('端末に保存できません。ブラウザで開き、保存設定と空き容量を確認してください。'); }
+  loadedStorage=serialized;
+  real = next;
+  storageProblem = '';
+}
+function notify(message) {
+  $('toast').textContent = message;
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => $('toast').textContent='',3800);
+}
+function payBreakdown(visit,date,settings) {
+  if (!visit) return null;
+  const feeRate=settings.feeRates[date.slice(0,7)], hours=visit.minutes/60;
+  const treatment=feeRate==null && visit.count>0 ? null : visit.sales*(1-(feeRate??0)/100);
+  const personal=visit.personal*settings.personal, gender=visit.gender*settings.gender;
+  const options=sum(visit.options,item=>item.share);
+  const facility=hours*settings.facility, material=hours*settings.material, other=hours*settings.other;
+  const additions=personal+gender+options;
+  const treatmentNet=treatment==null?null:treatment-facility-material;
+  const net=treatmentNet==null?null:treatmentNet+additions-other;
+  return {treatment,treatmentNet,personal,gender,options,additions,facility,material,other,net};
+}
+const customerSpend = record => record?.sales!=null && record.total>0 ? record.sales/record.total : null;
+function buildDemo() {
+  const demoMonth = today.slice(0,7), previous = monthOffset(demoMonth,-1);
+  const state = initial();
+  state.stores = [{id:'east',name:'サンプル中央店'},{id:'west',name:'サンプル西店'}];
+  Object.assign(state.settings,{personal:300,target:180000,feeRates:{[previous]:30,[demoMonth]:28}});
+  for (const period of [previous,demoMonth]) {
+    const last = Number(monthEnd(period).slice(-2));
+    for (let day=1; day<=last; day++) {
+      const date = period + '-' + String(day).padStart(2,'0'), dow=weekday(date);
+      const store = dow === 3 || dow === 6 ? 'west' : 'east';
+      const key=keyFor(date,store);
+      const off = dow===1 || dow===4;
+      const early = dow === 5 || dow === 6;
+      const shift = off ? {status:'off'} : {status:'work',start:early?'11:00':'13:00',end:early?'19:30':'21:30',breaks:30};
+      state.shifts[key] = {date,store,plan:clone(shift),actual:clone(shift)};
+      const lengths = off ? [] : Array.from({length:dow===6?5:dow===0?4:3+(day%2)},(_, index)=>({
+        time:String((early?11:13)+index).padStart(2,'0')+(index%2?':20':':00'),
+        minutes:index%3===0?60:45, sales:index%3===0?3600:2750,
+        kind:index===1 && dow!==2?'personal':index===2 && day%2===0?'gender':'free',
+        memo:index===0?'足つぼ15分＋もみほぐし45分':''
+      }));
+      if (!off) {
+        if (day%5===0) {
+          const {options,...basic}=summary({mode:'detail',details:lengths});
+          state.visits[key] = {date,store,mode:'basic',basic};
+        } else {
+          if (day%2===0) lengths[0].options=defaultOptions();
+          state.visits[key] = {date,store,mode:'detail',details:lengths};
+        }
+      }
+      state.traffic[key] = {date,store,total:(off?17:20)+dow+(day%6),staff:3+(day%4),sales:day%4===0?null:52000+dow*7300+day*1000,hours:day%3===0?{}:{11:3+(day%2),13:4,15:5+(day%3),18:3}};
+    }
+  }
+  return state;
+}
+
+const option = (value,label,current) => '<option value="'+esc(value)+'"'+(value===current?' selected':'')+'>'+esc(label)+'</option>';
+const storeOptions = (value, all=false) => (all?option('','すべての店舗',value):'') +
+  data().stores.map(s=>option(s.id,s.name,value)).join('');
+const field = (label,control) => '<label class="field"><span>'+label+'</span>'+control+'</label>';
+const input = (name,type,value='',extra='') => '<input name="'+name+'" type="'+type+'" value="'+esc(value)+'" '+extra+'>';
+const numeric = (name,value='',max=10000000,min=0,required=true,step=1) =>
+  input(name,'number',value??'','min="'+min+'" max="'+max+'" step="'+step+'" inputmode="'+(step===1?'numeric':'decimal')+'" '+(required?'required':''));
+const dateInput = (name,value) => input(name,'date',value,'min="1900-01-01" max="2199-12-31" required');
+const select = (name,options) => '<select name="'+name+'">'+options+'</select>';
+const badge = (label,style='') => '<span class="pill '+style+'">'+label+'</span>';
+const empty = message => '<p class="empty">'+message+'</p>';
+const metric = (label,value) => '<div class="metric"><span class="sub">'+label+'</span><strong>'+value+'</strong></div>';
+// Replace the content inside either reserved slot when a placement is configured.
+const adSlot = placement => '<div class="ad-slot ad-slot--'+placement+'" data-ad-slot="'+placement+'">広告枠</div>';
+const setHeading = (name,help) => '<div class="page-title"><h2 tabindex="-1">'+name+'</h2><p class="sub">'+help+'</p></div>';
+const commands = (type,store,layer='') => 'data-edit="'+type+'" data-store="'+esc(store)+'" data-layer="'+layer+'"';
+
+function daySigns(date) {
+  const signs = new Set();
+  for (const {id} of currentStores()) {
+    const shift = byKey(data().shifts,date,id);
+    if (shift?.plan?.status==='work') signs.add('plan');
+    if (shift?.actual?.status==='work' || byKey(data().visits,date,id)) signs.add('done');
+    if (shift?.plan?.status==='off' || shift?.actual?.status==='off') signs.add('off');
+    if (byKey(data().traffic,date,id)) signs.add('store');
+  }
+  return [...signs];
+}
+const signText = {plan:'出勤予定',done:'実績あり',off:'休日',store:'店舗データ'};
+function calendar() {
+  const first=month+'-01', count=Number(monthEnd(month).slice(-2));
+  const daysMarkup = days.map(d=>'<div class="weekday">'+d+'</div>').join('') +
+    '<span aria-hidden="true"></span>'.repeat(weekday(first)) +
+    Array.from({length:count},(_,i)=>{
+      const date=month+'-'+String(i+1).padStart(2,'0'), signs=daySigns(date);
+      const title=date+' '+(signs.map(s=>signText[s]).join('、')||'未入力');
+      return '<button class="day '+(date===today?'today':'')+'" data-day="'+date+'" aria-label="'+title+
+        '" aria-pressed="'+(date===selectedDay)+'">'+(i+1)+'<span class="dots" aria-hidden="true">'+
+        signs.map(s=>'<span class="dot '+s+'"></span>').join('')+'</span></button>';
+    }).join('');
+  const storeRows=currentStores().map(store=>{
+    const key=keyFor(selectedDay,store.id), visit=data().visits[key];
+    return {store, key, visit, totals:visit ? summary(visit) : null};
+  });
+  const entries = storeRows.map(({store,key,visit,totals})=>{
+    const shift=data().shifts[key], traffic=data().traffic[key];
+    const pay=payBreakdown(totals,selectedDay,data().settings)?.net;
+    const shiftRow=(layer,label)=>{
+      const value=shift?.[layer];
+      const text=value?.status==='work' ? badge(value.start+'〜'+value.end+(value.end<value.start?' 翌日':''),layer==='actual'?'done':'')
+        : value ? badge('休日','off') : '<span class="sub">未入力</span>';
+      return '<div class="row between"><div>'+label+' '+text+'</div><button class="compact" '+commands('shift',store.id,layer)+' aria-label="'+label+(value?'を編集':'を登録')+'">'+(value?'編集':'登録')+'</button></div>';
+    };
+    return '<div class="record"><strong>'+esc(store.name)+'</strong>'+shiftRow('plan','出勤予定')+shiftRow('actual','勤務実績')+
+      '<div class="row between"><div>施術実績 '+(totals?badge(qty(totals.count)+' · '+totals.minutes+'分','done'):'<span class="sub">未入力</span>')+
+      '</div><button class="compact" '+commands('visit',store.id)+' aria-label="施術実績'+(totals?'を編集':'を登録')+'">'+(totals?'編集':'登録')+'</button></div>'+
+      (totals?'<p class="sub">施術売上 '+yen(totals.sales)+' ／ 報酬目安 '+configuredYen(pay,pay==null)+'</p>':'')+
+      (visit?.mode==='detail'?'<p class="sub">オプション '+optionLine(summarizeOptions(totals.options))+'</p>':'')+
+      '<div class="row between"><div>店舗データ '+(traffic?badge(traffic.total==null?'記録あり':format(traffic.total)+'人 来店','store'):'<span class="sub">未入力</span>')+
+      '</div><button class="compact" '+commands('traffic',store.id)+' aria-label="店舗データ'+(traffic?'を編集':'を登録')+'">'+(traffic?'編集':'登録')+'</button></div>'+
+      (traffic?.sales!=null?'<p class="sub">店舗売上 '+yen(traffic.sales)+'</p>':'')+'</div>';
+  }).join('');
+  const detailRows=storeRows.filter(row=>row.visit?.mode==='detail');
+  const dailyOptions=detailRows.flatMap(row=>row.totals.options);
+  const dailyTotal=detailRows.length>0 && storeRows.length>1
+    ? '<p class="sub">全店舗のオプション合計 '+optionLine(summarizeOptions(dailyOptions))+'</p>' : '';
+  const label = month.replace('-','年')+'月';
+  return setHeading('勤務カレンダー','日付から出勤予定・勤務実績・施術・店舗データを記録')+
+    '<div class="split cal-layout"><section class="panel"><div class="row between"><h3>'+label+'</h3><div class="row"><button data-month="-1">前月</button><button data-month="today">今月</button><button data-month="1">翌月</button></div></div>'+
+    field('表示店舗',select('calendarStore',storeOptions(calendarStore,true)))+'<div class="cal">'+daysMarkup+'</div>'+
+    '<div class="legend sub">'+Object.entries(signText).map(([s,label])=>'<span><i class="dot '+s+'"></i>'+label+'</span>').join('')+'</div>'+
+    '<button data-edit="batch" data-store="'+esc(calendarStore||data().stores[0].id)+'">曜日で一括登録</button></section>'+
+    '<section class="panel" id="dayPanel"><div class="row between"><h3 id="selectedDayTitle" tabindex="-1">'+selectedDay+'（'+days[weekday(selectedDay)]+'）</h3></div>'+dailyTotal+'<div class="entries">'+entries+'</div></section></div>';
+}
+const clockInput = (name,value,required=false) => input(name,'text',value,
+  'data-clock inputmode="numeric" autocomplete="off" placeholder="例：1430" '+(required?'required':''));
+function shiftFields(shift) {
+  return field('勤務区分',select('status',option('work','出勤',shift.status)+option('off','休日',shift.status)))+
+    '<fieldset class="stack" id="workFields" '+(shift.status==='off'?'hidden disabled':'')+'>'+
+    '<div class="split">'+field('出勤時刻',clockInput('start',shift.start??'13:00',true))+
+    field('退勤時刻',clockInput('end',shift.end??'21:00',true))+'</div>'+
+    '<details '+((shift.breaks??0)>0?'open':'')+'><summary>休憩（任意）</summary>'+field('休憩時間（分）',numeric('breaks',shift.breaks??0,1438,0,false))+'</details>'+
+    '<p class="sub">退勤時刻が出勤時刻より早い場合は翌日退勤として集計します。</p></fieldset>';
+}
+const optionLine = v => qty(v.count)+' ／ 売上 '+yen(v.sales)+' ／ 追加報酬 '+yen(v.pay);
+function detailOptionFields(item) {
+  const configured=data().settings.options;
+  const active=new Map(configured.map(entry=>[entry.id,entry]));
+  const recorded=new Map((item.options??[]).map(entry=>[entry.id,entry]));
+  const ids=new Set([...active.keys(),...recorded.keys()]);
+  const choices=[...ids].map(optionId=>{
+    const saved=recorded.get(optionId), setting=active.get(optionId), entry=saved??setting;
+    const historical=saved && (!setting || saved.name!==setting.name || saved.price!==setting.price || saved.share!==setting.share);
+    return '<label class="check"><input type="checkbox" data-option="'+esc(JSON.stringify(entry))+'"'+
+      (saved?' checked':'')+'><span>'+esc(entry.name)+'<br><small>販売 '+yen(entry.price)+' ／ 報酬 '+yen(entry.share)+
+      (historical?'（記録時）':'')+'</small></span></label>';
+  }).join('');
+  return '<details '+(recorded.size?'open':'')+'><summary>オプション（任意・複数可）</summary>'+
+    '<div class="stack">'+choices+'</div></details>';
+}
+function detailRow(item,index) {
+  return '<div class="record detail-entry"><div class="row between"><strong>施術 '+(index+1)+
+    '</strong><button type="button" data-remove-detail aria-label="施術 '+(index+1)+' を外す">外す</button></div><div class="split">'+
+    field('施術合計分数',numeric('minutesDetail',item.minutes,1440,1))+field('施術売上（円）',numeric('salesDetail',item.sales))+
+    field('指名区分',select('kindDetail',kinds.map(k=>option(k,categories[k],item.kind)).join('')))+
+    field('来店時刻（任意）',clockInput('timeDetail',item.time))+'</div>'+
+    detailOptionFields(item)+
+    '<details '+(item.memo?'open':'')+'><summary>コース・自由メモ（任意）</summary>'+field('コースなど（お客様の個人情報は入力しない）',
+      input('memoDetail','text',item.memo,'maxlength="160" placeholder="例：足つぼ15分＋もみほぐし45分"'))+'</details></div>';
+}
+function visitFields(record) {
+  const mode = record?.mode ?? 'basic', basic = record ? summary(record) : {};
+  const details = record?.details ?? [];
+  return '<p class="note">施術売上は指名料・オプション料金を除いた金額を入力してください。集計には選択した入力方法を使います。</p>'+
+    field('入力方法',select('mode',option('basic','基本入力（日別合計）',mode)+option('detail','詳細入力（施術ごと）',mode)))+
+    '<fieldset id="basicFields" class="split" '+(mode==='basic'?'':'hidden disabled')+'>'+
+    field('施術合計時間（分）',numeric('minutes',basic.minutes,1440))+field('施術件数',numeric('count',basic.count,10000))+
+    field('個人指名件数',numeric('personal',basic.personal??0,10000))+field('性別指名件数',numeric('gender',basic.gender??0,10000))+
+    field('施術売上合計（円）',numeric('sales',basic.sales,100000000))+'</fieldset>'+
+    '<fieldset id="detailFields" class="stack" '+(mode==='detail'?'':'hidden disabled')+'>'+
+    '<div id="detailRows" class="detail-list">'+details.map(detailRow).join('')+'</div>'+
+    '<button id="addDetail" type="button">＋ 施術を追加</button></fieldset>';
+}
+function openEditor(type,store,layer) {
+  const date=selectedDay, key=keyFor(date,store), d=data();
+  let title,body,record;
+  if (type==='shift') {
+    title=layer==='plan'?'出勤予定':'勤務実績';
+    record=d.shifts[key]?.[layer];
+    body=shiftFields(record??{status:'work',breaks:0});
+  } else if (type==='visit') {
+    title='施術実績';
+    record=d.visits[key];
+    body=visitFields(record);
+  } else if (type==='traffic') {
+    title='店舗データ';
+    record=d.traffic[key];
+    body='<p class="sub">確認できた項目だけ入力できます。実績がゼロの場合は「0」を入力してください。</p>'+
+      '<div class="split">'+field('店舗売上（円・任意）',numeric('storeSales',record?.sales,1000000000,0,false))+
+      field('1日の来店客数（任意）',numeric('total',record?.total,100000,0,false))+
+      field('出勤セラピスト人数（任意）',numeric('staff',record?.staff,10000,0,false))+'</div>'+
+      '<details '+(Object.keys(record?.hours??{}).length?'open':'')+'><summary>時間帯別来店客数（任意）</summary>'+
+      '<p class="sub">入力した時間帯を分析に使います。0人は「0」、未確認の時間帯は空欄で保存します。</p>'+
+      '<div class="hours">'+hours.map(h=>field(hourLabel(h),numeric('hour'+h,record?.hours[h],100000,0,false))).join('')+'</div></details>';
+  } else {
+    title='曜日で一括登録';
+    body=field('店舗',select('store',storeOptions(store)))+
+      '<div class="split">'+field('開始日',dateInput('from',month+'-01'))+field('終了日',dateInput('until',monthEnd(month)))+'</div>'+
+      '<fieldset><legend>曜日</legend><div class="row">'+days.map((label,i)=>'<label class="check"><input type="checkbox" name="weekday" value="'+i+'">'+label+'</label>').join('')+'</div></fieldset>'+
+      shiftFields({status:'work',breaks:0})+
+      '<p class="sub">出勤予定に登録します。選んだ店舗・日付の予定がある日はスキップします。期間は最大366日です。</p>';
+  }
+  editing={type,store,layer,date,key,record};
+  $('editorTitle').textContent=title;
+  $('editorBody').innerHTML=(type==='batch'?'':'<p class="sub">'+date+'（'+days[weekday(date)]+'）／ '+esc(storeName(store))+'</p>')+body;
+  $('deleteRecord').hidden=!record;
+  $('formError').hidden=true;
+  $('editor').showModal();
+  $('editor').scrollTop=0;
+}
+function saveEditor(event) {
+  event.preventDefault();
+  const {type,store,layer,date,key,record}=editing;
+  const form=event.currentTarget, v=fromForm(form), next=clone(data());
+  const shift = () => v.status==='off' ? {status:'off'} : {status:'work',start:v.start,end:v.end,breaks:Number(v.breaks)};
+  let message='保存しました';
+  try {
+    if (type==='shift') {
+      next.shifts[key] ??= {date,store};
+      next.shifts[key][layer]=shift();
+    } else if (type==='visit') {
+      let visit = {date,store,mode:v.mode};
+      if (v.mode==='basic') {
+        visit.basic=Object.fromEntries(['minutes','count','personal','gender','sales'].map(field=>[field,Number(v[field])]));
+      } else {
+        visit.details=[...form.querySelectorAll('.detail-entry')].map(row=>{
+          const value=name=>row.querySelector('[name="'+name+'Detail"]').value;
+          const options=[...row.querySelectorAll('[data-option]:checked')].map(checkbox=>JSON.parse(checkbox.dataset.option));
+          const detail={minutes:Number(value('minutes')),sales:Number(value('sales')),kind:value('kind'),time:value('time'),memo:value('memo')};
+          if (options.length) detail.options=options;
+          return detail;
+        });
+        check(visit.details.length>0,'施術を1件以上追加してください。施術がゼロの場合は基本入力で記録できます。');
+      }
+      if (record && record.mode!==visit.mode) {
+        const warning=visit.mode==='basic'
+          ? '基本入力に切り替えると、施術ごとの来店時刻・オプションなどの詳細記録が消えます。切り替えますか？'
+          : '入力方法を切り替えます。以前の入力内容を今回の内容に置き換えますか？';
+        if (!confirm(warning)) return;
+      }
+      next.visits[key]=visit;
+    } else if (type==='traffic') {
+      const entries=hours.flatMap(h=>v['hour'+h]===''?[]:[[h,Number(v['hour'+h])]]);
+      next.traffic[key]={date,store,total:optionalNumber(v.total),staff:optionalNumber(v.staff),sales:optionalNumber(v.storeSales),hours:Object.fromEntries(entries)};
+    } else {
+      const picks = new FormData(form).getAll('weekday').map(Number);
+      check(picks.length>0,'曜日を1つ以上選択してください。');
+      check(validDate(v.from) && validDate(v.until) && v.from<=v.until &&
+        (+dateOf(v.until)- +dateOf(v.from))/86400000 <366,'開始日・終了日を366日以内に設定してください。');
+      let added=0, skipped=0;
+      for (let day=v.from;day<=v.until;day=offset(day,1)) {
+        if (!picks.includes(weekday(day))) continue;
+        const target=keyFor(day,v.store);
+        next.shifts[target]??={date:day,store:v.store};
+        if (next.shifts[target].plan) {skipped++;continue;}
+        next.shifts[target].plan=shift();
+        added++;
+      }
+      check(added+skipped>0,'指定期間に選んだ曜日がありません。');
+      message='予定を'+added+'日登録、既存の予定'+skipped+'日をスキップしました';
+    }
+    commit(next);
+    $('editor').close();
+    render();
+    $('selectedDayTitle')?.focus();
+    notify(message);
+  } catch (error) { showFormError(error.message); }
+}
+function showFormError(message) {
+  $('formError').hidden=false;
+  $('formError').textContent=message;
+}
+function removeRecord() {
+  if (!confirm('選択した記録を削除しますか？')) return;
+  const {type,layer,key}=editing, next=clone(data());
+  if (type==='shift') {
+    delete next.shifts[key][layer];
+    if (!next.shifts[key].plan && !next.shifts[key].actual) delete next.shifts[key];
+  } else {
+    delete next[type==='visit'?'visits':'traffic'][key];
+  }
+  try {
+    commit(next); $('editor').close(); render(); $('selectedDayTitle')?.focus(); notify('削除しました');
+  } catch (error) { showFormError(error.message); }
+}
+
+function bounds() {
+  const {kind,anchor,start,end}=filter, period=anchor.slice(0,7);
+  if (kind==='custom') return [start,end];
+  if (kind==='year') return [period.slice(0,4)+'-01-01',period.slice(0,4)+'-12-31'];
+  if (kind==='week') {
+    const monday=offset(anchor,-((weekday(anchor)+6)%7));
+    return [monday,offset(monday,6)];
+  }
+  return [period+'-01',monthEnd(period)];
+}
+function filterPanel() {
+  const [from,until]=bounds();
+  return '<section class="panel"><div class="filter-grid">'+
+    field('期間',select('period',Object.entries({week:'週間',month:'月間',year:'年間',custom:'自由期間'}).map(([v,label])=>option(v,label,filter.kind)).join('')))+
+    (filter.kind==='custom' ? field('開始日',dateInput('filterStart',filter.start))+field('終了日',dateInput('filterEnd',filter.end))
+      :field('対象日',dateInput('anchor',filter.anchor)))+
+    field('対象店舗',select('filterStore',storeOptions(filter.store,true)))+'</div><p class="sub">'+from+' 〜 '+until+'</p></section>';
+}
+function rowsBetween(from,until,store='') {
+  const d=data(), keys=[...new Set([...Object.keys(d.shifts),...Object.keys(d.visits),...Object.keys(d.traffic)])].sort();
+  return keys.flatMap(key=>{
+    const record=d.shifts[key] ?? d.visits[key] ?? d.traffic[key], {date,store:storeId}=record;
+    if (date<from || date>until || (store && store!==storeId)) return [];
+    const plan=d.shifts[key]?.plan, actual=d.shifts[key]?.actual, visit=d.visits[key], traffic=d.traffic[key];
+    const totals=visit?summary(visit):null;
+    const work=actual?.status==='work'?netMinutes(actual):null;
+    const waiting=work!=null && totals ? work-totals.minutes : null;
+    const breakdown=payBreakdown(totals,date,d.settings);
+    return [{date,store:storeId,dow:weekday(date),plan,actual,visit,traffic,totals,work,waiting,
+      breakdown,pay:breakdown?.net??null}];
+  });
+}
+function hourlyTreatment(rows,minutes,amount) {
+  return ratio(sum(rows,r=>r.breakdown[amount])*60,sum(rows,minutes));
+}
+function summarize(rows) {
+  const shifts=rows.filter(r=>r.work!=null), known=rows.filter(r=>r.totals), paid=known.filter(r=>r.pay!=null);
+  const paired=shifts.filter(r=>r.totals), pairedPaid=paired.filter(r=>r.pay!=null);
+  const workDates=new Set(shifts.map(r=>r.date));
+  const minutes=known.length?sum(known,r=>r.totals.minutes):null, work=shifts.length?sum(shifts,r=>r.work):null;
+  const waiting=paired.length?sum(paired,r=>r.waiting):null;
+  const count=known.length?sum(known,r=>r.totals.count):null, personal=sum(known,r=>r.totals.personal), gender=sum(known,r=>r.totals.gender);
+  const pay=paid.length?sum(paid,r=>r.pay):null;
+  return {shifts,known,paid,paired,pairedPaid,workDates,minutes,work,waiting,count,personal,gender,
+    free:count==null?null:count-personal-gender, nomination:ratio(personal,count), pay,
+    utilization:ratio(sum(paired,r=>r.totals.minutes),sum(paired,r=>r.work)),
+    averageWaiting:mean(paired,r=>r.waiting),
+    perTreatment:hourlyTreatment(paid,r=>r.totals.minutes,'treatmentNet'),
+    grossPerTreatment:hourlyTreatment(paid,r=>r.totals.minutes,'treatment'),
+    grossPerWork:hourlyTreatment(pairedPaid,r=>r.work,'treatment'),
+    perWork:hourlyTreatment(pairedPaid,r=>r.work,'treatmentNet'),
+    sales:known.length?sum(known,r=>r.totals.sales):null,
+    missingPay:known.length-paid.length, missingVisits:shifts.length-paired.length,
+    missingShifts:known.filter(r=>r.totals.count>0 && r.work===null).length};
+}
+const configuredYen = (value,missing) => missing ? '未設定' : yen(value);
+const netPayText = total => configuredYen(total.pay,total.missingPay>0);
+function payDetails(total) {
+  const amount=key=>total.known.length?sum(total.known,r=>r.breakdown[key]):null;
+  const fee=key=>{ const value=amount(key);return value===null?'—':yen(value===0?0:-value); };
+  const line=(label,value,style='')=>'<div class="pay-line '+style+'"><dt>'+label+'</dt><dd>'+value+'</dd></div>';
+  return panel('報酬の内訳','<dl class="pay-lines">'+
+    line('施術報酬（控除前）',configuredYen(amount('treatment'),total.missingPay>0))+
+    line('個人指名報酬',yen(amount('personal')))+line('性別指名報酬',yen(amount('gender')))+
+    line('オプション報酬',yen(amount('options')))+line('追加報酬合計',yen(amount('additions')),'subtotal')+
+    line('施設利用料',fee('facility'),'deduction')+
+    line('固定材料費',fee('material'),'deduction')+
+    (amount('other')?line('その他控除',fee('other'),'deduction'):'')+
+    line('報酬目安（控除後）',netPayText(total),'total')+'</dl>');
+}
+const groupWeek = (rows, fn) => [1,2,3,4,5,6,0].map(i=>({label:days[i]+'曜',value:fn(rows.filter(r=>r.dow===i))}));
+function bars(points,fmt,tone='') {
+  if (points.every(p=>p.value==null)) return empty('分析に必要な記録がありません。');
+  const max=Math.max(1e-8,...points.map(p=>p.value??0));
+  return '<div class="bars">'+points.map(({label,value})=>'<div class="bar"><span>'+esc(label)+
+    '</span><div class="track" aria-hidden="true">'+(value>0?'<div class="fill '+tone+'" style="width:'+(value/max*100)+'%"></div>':'')+
+    '</div><b>'+fmt(value)+'</b></div>').join('')+'</div>';
+}
+const cell = value => '<td>'+value+'</td>';
+const ncell = value => '<td class="num">'+value+'</td>';
+function table(headers,body) {
+  return '<div class="scroll" tabindex="0" role="region" aria-label="'+esc(headers[0])+'の表"><table><thead><tr>'+
+    headers.map(h=>'<th scope="col">'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+body+'</tbody></table></div>';
+}
+const tr = value => '<tr>'+value+'</tr>';
+const panel = (heading,body) => '<section class="panel"><h3>'+heading+'</h3>'+body+'</section>';
+function correlation(pairs) {
+  if (pairs.length<3) return null;
+  const x=mean(pairs,p=>p[0]), y=mean(pairs,p=>p[1]);
+  const divisor=Math.sqrt(sum(pairs,p=>(p[0]-x)**2)*sum(pairs,p=>(p[1]-y)**2));
+  return divisor ? sum(pairs,p=>(p[0]-x)*(p[1]-y))/divisor : null;
+}
+function hourly(rows) {
+  const bins=hours.map(hour=>({hour,free:0,personal:0,gender:0,customers:0,trafficCount:0,shiftMinutes:0,coverage:0,observed:0}));
+  let missing=0;
+  for (const row of rows) {
+    for (const [h,value] of Object.entries(row.traffic?.hours??{})) {
+      bins[h].customers+=value;
+      bins[h].trafficCount++;
+    }
+    const timed=row.visit?.mode==='detail' ? row.visit.details.filter(v=>v.time) : [];
+    missing+=(row.totals?.count??0)-timed.length;
+    for (const item of timed) bins[Math.floor(minuteOf(item.time)/60)][item.kind]++;
+    if (row.work==null) continue;
+    const complete=row.totals && timed.length===row.totals.count;
+    const intervals=clockIntervals(row.actual);
+    for (const bin of bins) {
+      const overlap=sum(intervals,([start,end])=>Math.max(0,Math.min(end,(bin.hour+1)*60)-Math.max(start,bin.hour*60)));
+      bin.shiftMinutes+=overlap;
+      if (!complete) continue;
+      bin.coverage+=overlap;
+      for (const item of timed) {
+        const minute=minuteOf(item.time);
+        if (Math.floor(minute/60)===bin.hour && intervals.some(([start,end])=>start<=minute && minute<end)) bin.observed++;
+      }
+    }
+  }
+  return {bins,missing};
+}
+function proposals(rows,total,{bins}) {
+  const groups=[1,2,3,4,5,6,0].map(i=>{
+    const list=rows.filter(r=>r.dow===i), s=summarize(list);
+    return {label:days[i]+'曜',...s};
+  });
+  const rank=(name,val,count,fmt,low=false)=>{
+    const best=groups.filter(g=>g[val]!=null && count(g)>=2)
+      .sort((a,b)=>low?a[val]-b[val]:b[val]-a[val]).slice(0,3);
+    return '<li><strong>'+name+'</strong>　'+(best.length?best.map(g=>g.label+' '+fmt(g[val])+'（'+count(g)+'枠）').join(' ／ ')
+      :'各曜日で対象の記録が2枠以上必要です。')+'</li>';
+  };
+  const bestHours=bins.filter(b=>b.coverage>=120 && b.observed>0)
+    .sort((a,b)=>b.observed/b.coverage-a.observed/a.coverage).slice(0,3);
+  const fullDates=[...total.workDates].filter(date=>rows.filter(r=>r.date===date&&(r.work!=null || (r.totals?.count??0)>0))
+    .every(r=>r.work!=null&&r.pay!=null));
+  const daily=mean(fullDates,date=>sum(total.pairedPaid.filter(r=>r.date===date),r=>r.pay));
+  const target=data().settings.target;
+  return '<ol class="rank">'+rank('稼働率が高い曜日','utilization',g=>g.paired.length,pct)+
+    rank('平均待機が短い曜日','averageWaiting',g=>g.paired.length,duration,true)+
+    rank('出勤1時間あたりの施術報酬が高い曜日（控除後）','perWork',g=>g.pairedPaid.length,yen)+
+    rank('個人指名率が高い曜日','nomination',g=>g.known.filter(r=>r.totals.count>0).length,pct)+
+    '<li><strong>来店が入りやすかった勤務時間帯</strong>　'+(bestHours.length?bestHours.map(b=>hourLabel(b.hour)+' '+(b.observed*60/b.coverage).toFixed(1)+'件/h（勤務'+duration(b.coverage)+'）').join(' ／ ')
+      :'勤務実績と全件の来店時刻がそろった枠が必要です。各時間帯の勤務が合計2時間以上で表示します。')+'</li>'+
+    '<li><strong>目標報酬までの勤務日数</strong>　'+(!target?'設定で目標月間報酬を入力してください。':
+      fullDates.length<2 || !(daily>0)?'報酬を計算できる勤務日が2日以上あり、平均報酬が正の場合に表示します。':
+      '目標 '+yen(target)+' ÷ 1日平均 '+yen(daily)+' ＝ 約<strong>'+format(Math.ceil(target/daily))+'日</strong>（'+fullDates.length+'日分）')+
+    '</li></ol><p class="sub">選択期間の実績に基づく参考情報です。時間帯は勤務枠内の来店回数を勤務時間で割った値です。時間帯ごとの休憩時刻は集計していません。将来の売上・報酬を保証するものではありません。</p>';
+}
+function analysis() {
+  const [from,until]=bounds(), rows=rowsBetween(from,until,filter.store), timing=hourly(rows);
+  const switcher='<div class="analysis-switch" role="group" aria-label="分析の切り替え">'+
+    [['personal','自分の分析'],['store','店舗分析']].map(([value,label])=>
+      '<button type="button" data-analysis-view="'+value+'" aria-pressed="'+(analysisView===value)+'">'+label+'</button>').join('')+'</div>';
+  const header='<div class="page-title-row">'+setHeading('分析','期間と店舗で絞り込み')+adSlot('analysis')+'</div>'+switcher+filterPanel();
+  if (analysisView==='store') return header+storeAnalysis(rows,timing);
+  const total=summarize(rows), worked=total.workDates.size;
+  const baseline=total.minutes==null?null:total.minutes/60*data().settings.base;
+  const hero='<section class="panel analysis-hero"><h2>自分の集計</h2><div class="tiles">'+
+    metric('報酬目安（控除後）',netPayText(total))+metric('施術売上',yen(total.sales))+
+    metric('出勤日数・勤務時間',worked+'日 ／ '+duration(total.work))+metric('施術時間・件数',duration(total.minutes)+' ／ '+qty(total.count))+
+    '</div></section>';
+  const hourlyPay=(title,before,after,missing)=>'<div class="metric"><span class="sub">'+title+'</span>'+
+    '<strong>'+configuredYen(before,missing)+'</strong><span class="metric-note">控除後 '+configuredYen(after,missing)+'</span></div>';
+  const work=panel('勤務の指標','<div class="tiles">'+metric('稼働率',pct(total.utilization))+
+    metric('待機時間',duration(total.waiting))+'</div><h3 class="hourly-label">時間あたりの施術報酬</h3><div class="split hourly-metrics">'+
+    hourlyPay('施術1時間あたり',total.grossPerTreatment,total.perTreatment,total.missingPay>0)+
+    hourlyPay('出勤1時間あたり',total.grossPerWork,total.perWork,total.paired.length>total.pairedPaid.length)+
+    '</div><details><summary>計算方法について</summary>'+
+    '<p class="sub">施術売上から月別の施設利用料率を一度だけ差し引きます。控除後はさらに施設利用料と固定材料費を施術分数に応じて引きます。指名・オプション報酬とその他控除は最終の報酬目安に反映します。</p>'+
+    '<p class="sub">施術1時間あたりは施術報酬を合計施術時間で割ります。出勤1時間あたりと稼働率は、施術と勤務の実績が同じ日・店舗にそろった枠を集計します。施術0件を記録した日は勤務時間を含め、未入力は集計から外します。稼働率は合計施術時間 ÷ 合計勤務時間です。</p>'+
+    '<p class="sub">基本料金の換算額 '+yen(baseline)+' ／ 施術未入力の勤務 '+total.missingVisits+'枠 ／ 勤務実績のない施術 '+total.missingShifts+
+    '枠 ／ 施設利用料率未設定の施術 '+total.missingPay+'枠</p></details>');
+  const workCharts='<div class="charts">'+panel('曜日別の施術時間',bars(groupWeek(rows,g=>summarize(g).minutes),duration))+
+    panel('曜日別の稼働率',bars(groupWeek(rows,g=>summarize(g).utilization),pct,'teal'))+'</div>';
+  const nominationRows=groupWeek(rows,g=>summarize(g)).map(({label,value:v})=>tr(cell(label)+ncell(qty(v.free))+
+    ncell(qty(v.count==null?null:v.personal))+ncell(qty(v.count==null?null:v.gender))+ncell(pct(v.nomination)))).join('');
+  const nomination=panel('指名分析','<div class="tiles">'+metric('フリー',qty(total.free))+metric('個人指名',qty(total.count==null?null:total.personal))+
+    metric('性別指名',qty(total.count==null?null:total.gender))+metric('個人指名率',pct(total.nomination))+'</div>'+
+    '<div class="charts"><section><h3>曜日別</h3>'+table(['曜日','フリー','個人','性別','個人率'],nominationRows)+'</section>'+
+    '<section><h3>来店時間帯別</h3>'+
+    (timing.bins.some(b=>b.free+b.personal+b.gender)?table(['時間帯','フリー','個人','性別','個人率'],timing.bins.filter(b=>b.free+b.personal+b.gender)
+      .map(b=>tr(cell(hourLabel(b.hour))+ncell(qty(b.free))+ncell(qty(b.personal))+ncell(qty(b.gender))+ncell(pct(ratio(b.personal,b.free+b.personal+b.gender))))).join('')):empty('来店時刻のある詳細記録がありません。'))+
+    '<p class="sub">来店時刻のない施術 '+timing.missing+'件を除外。</p></section></div>');
+  const workHours=timing.bins.filter(b=>b.shiftMinutes>0 || b.free+b.personal+b.gender>0);
+  const workByHour=panel('時間帯別の勤務傾向',workHours.length?
+    table(['時間帯','勤務枠の合計','時刻付き施術'],workHours.map(b=>
+      tr(cell(hourLabel(b.hour))+ncell(duration(b.shiftMinutes||null))+ncell(qty(b.free+b.personal+b.gender||null)))).join(''))+
+    '<p class="sub">勤務枠の合計は出勤から退勤まで。休憩の開始・終了時刻は集計対象外です。</p>':
+    empty('勤務枠や来店時刻の記録がありません。'));
+  const current=(filter.kind==='custom'?filter.end:filter.anchor).slice(0,7), prev=monthOffset(current,-1);
+  const previousMonth=[prev,current].map(m=>[m,summarize(rowsBetween(m+'-01',monthEnd(m),filter.store))]);
+  const periods=new Map();
+  for (const row of rows) {
+    const key=filter.kind==='week'?row.date:row.date.slice(0,7);
+    if (!periods.has(key)) periods.set(key,[]);
+    periods.get(key).push(row);
+  }
+  const comparisonTable=(first,periods)=>table([first,'出勤日','施術時間','施術売上','報酬目安'],periods
+    .map(([key,v])=>tr(cell(esc(key))+ncell(v.workDates.size+'日')+ncell(duration(v.minutes))+ncell(yen(v.sales))+ncell(netPayText(v)))).join(''));
+  const [a,b]=previousMonth.map(([,v])=>v);
+  const delta = a.pay!=null && b.pay!=null && !a.missingPay && !b.missingPay && !a.missingVisits && !b.missingVisits
+    ? '<p class="sub">前月からの報酬差 '+(b.pay>=a.pay?'+':'')+yen(b.pay-a.pay)+'</p>' : '<p class="sub">報酬差は両月の施術実績と報酬の計算に必要な入力がそろった場合に表示します。</p>';
+  let priorComparison='';
+  if (filter.kind!=='month') {
+    const dayCount=(+dateOf(until)- +dateOf(from))/86400000+1;
+    const priorEnd=offset(from,-1);
+    const priorStart=filter.kind==='year' ? priorEnd.slice(0,4)+'-01-01' : offset(from,-dayCount);
+    priorComparison='<h3>選択期間と直前の期間</h3>'+comparisonTable('期間',[
+      [priorStart+' 〜 '+priorEnd,summarize(rowsBetween(priorStart,priorEnd,filter.store))],
+      [from+' 〜 '+until,total]
+    ]);
+  }
+  const ownByStore=data().stores.filter(store=>!filter.store||filter.store===store.id)
+    .map(store=>[store.name,summarize(rows.filter(row=>row.store===store.id))]);
+  const comparison=panel('期間比較','<h3>対象月と前月</h3>'+comparisonTable('対象月',previousMonth)+delta+priorComparison+
+    '<h3>選択期間の内訳</h3>'+(periods.size?comparisonTable(filter.kind==='week'?'日付':'月',[...periods].map(([k,v])=>[k,summarize(v)])):
+    empty('対象期間に記録がありません。'))+
+    (ownByStore.length>1?'<details><summary>店舗別の自分の実績</summary>'+comparisonTable('店舗',ownByStore)+'</details>':''));
+  return header+hero+(!rows.length?empty('対象期間の記録がありません。'):'')+
+    optionAnalysis(rows)+work+payDetails(total)+workCharts+workByHour+nomination+comparison+
+    panel('シフト改善提案',proposals(rows,total,timing));
+}
+function storeAnalysis(rows,timing) {
+  const logs=rows.filter(r=>r.traffic);
+  const traffic=logs.filter(r=>r.traffic.total!==null);
+  const sales=logs.filter(r=>r.traffic.sales!==null);
+  const staff=logs.filter(r=>r.traffic.staff!==null);
+  const matched=logs.filter(r=>customerSpend(r.traffic)!==null);
+  const people=n=>n==null?'—':format(n)+'人';
+  const averageSpend=group=>ratio(sum(group,r=>r.traffic.sales),sum(group,r=>r.traffic.total));
+  const hero='<section class="panel analysis-hero"><h2>店舗の集計</h2><div class="tiles">'+
+    metric('店舗売上',yen(sales.length?sum(sales,r=>r.traffic.sales):null))+
+    metric('来店人数',people(traffic.length?sum(traffic,r=>r.traffic.total):null))+
+    metric('平均出勤セラピスト数',headcount(mean(staff,r=>r.traffic.staff)))+
+    metric('客単価',yen(averageSpend(matched)))+'</div></section>';
+  const storeCompare=data().stores.filter(s=>!filter.store||filter.store===s.id).map(s=>{
+    const storeRows=logs.filter(r=>r.store===s.id);
+    const arrivals=storeRows.filter(r=>r.traffic.total!==null);
+    const sales=storeRows.filter(r=>r.traffic.sales!==null);
+    const paired=storeRows.filter(r=>customerSpend(r.traffic)!==null);
+    const spend=averageSpend(paired);
+    return tr(cell(esc(s.name))+
+      ncell(arrivals.length?format(sum(arrivals,r=>r.traffic.total))+'人':'—')+
+      ncell(headcount(mean(storeRows.filter(r=>r.traffic.staff!==null),r=>r.traffic.staff)))+
+      ncell(sales.length?yen(sum(sales,r=>r.traffic.sales))+'（'+sales.length+'日）':'—')+
+      ncell(paired.length?yen(spend)+'（'+paired.length+'日）':'—'));
+  }).join('');
+  const visitorsCases=traffic.filter(r=>r.totals).map(r=>[r.traffic.total,r.totals.count]);
+  const visitorsStaff=traffic.filter(r=>r.traffic.staff!==null).map(r=>[r.traffic.total,r.traffic.staff]);
+  const relationship=(label,pairs)=>{
+    const corr=correlation(pairs);
+    return tr(cell(label)+ncell(pairs.length+'枠')+ncell(pairs.length?mean(pairs,p=>p[0]).toFixed(1):'—')+
+      ncell(pairs.length?mean(pairs,p=>p[1]).toFixed(1):'—')+ncell(corr==null?'—':corr.toFixed(2)));
+  };
+  const stores=panel('店舗の傾向',
+    '<div class="charts"><section><h3>曜日別来店客数（店舗・日あたり平均）</h3>'+
+    bars(groupWeek(traffic,g=>mean(g,r=>r.traffic.total)),n=>n==null?'—':n.toFixed(1)+'人','teal')+'</section>'+
+    '<section><h3>曜日別の平均店舗売上</h3>'+bars(groupWeek(sales,g=>mean(g,r=>r.traffic.sales)),yen)+'</section></div>'+
+    '<section><h3>時間帯別来店客数</h3>'+
+    (timing.bins.some(b=>b.trafficCount)?table(['時間帯','来店合計','記録枠'],timing.bins.filter(b=>b.trafficCount)
+      .map(b=>tr(cell(hourLabel(b.hour))+ncell(b.customers+'人')+ncell(b.trafficCount+'枠'))).join('')):empty('時間帯別の店舗データがありません。'))+'</section>'+
+    '<h3>店舗別の実績</h3>'+table(['店舗','来店合計','平均出勤人数','店舗売上','客単価'],storeCompare)+
+    '<p class="sub">売上は入力済みの日だけ集計。客単価は、売上と1人以上の来店客数を両方入力した日の合計売上 ÷ 合計来店客数です。</p>'+
+    '<h3>来店客数と施術・出勤人数の関係</h3>'+table(['比較項目','対象','平均来店数','比較項目の平均','相関係数'],
+      relationship('自分の施術件数',visitorsCases)+relationship('出勤セラピスト人数',visitorsStaff))+
+    '<p class="sub">同じ日・店舗で両項目を入力した枠を使用。相関係数は3枠以上あり、両項目にばらつきがある場合に表示します。</p>');
+  return hero+(!logs.length?empty('対象期間の店舗データがありません。'):'')+stores;
+}
+
+function optionAnalysis(rows) {
+  const byDay=new Map(), byMonth=new Map();
+  const details=rows.filter(row=>row.visit?.mode==='detail');
+  const items=details.flatMap(row=>row.totals.options);
+  for (const {date,totals} of details) {
+    const month=date.slice(0,7);
+    if (!byDay.has(date)) byDay.set(date,[]);
+    if (!byMonth.has(month)) byMonth.set(month,[]);
+    byDay.get(date).push(...totals.options);
+    byMonth.get(month).push(...totals.options);
+  }
+  const v=summarizeOptions(items);
+  const breakdown=(label,records)=>table([label,'販売件数','販売金額','セラピスト報酬'],records.map(([key,value])=>
+    tr(cell(esc(key))+ncell(qty(value.count))+ncell(yen(value.sales))+ncell(yen(value.pay)))).join(''));
+  const periods=(label,map)=>breakdown(label,[...map].map(([key,value])=>[key,summarizeOptions(value)]));
+  return panel('オプション販売','<div class="tiles">'+metric('販売件数',qty(v.count))+metric('オプション売上',yen(v.sales))+
+    metric('オプション報酬',yen(v.pay))+'</div>'+
+    (details.length?'<h3>月別</h3>'+periods('月',byMonth)+
+      '<details><summary>日別のオプション販売</summary>'+periods('日付',byDay)+'</details>':'')+
+    (items.length?'<details><summary>オプション別の内訳</summary>'+breakdown('オプション名',summarizeOptionsByName(items))+'</details>':
+      empty('オプションの販売記録がありません。')));
+}
+
+function csvCell(value) {
+  let text=String(value??'');
+  if (typeof value==='string' && /^[\s\uFEFF]*[=+@-]|^[\t\r\n]/.test(text)) text="'"+text;
+  return '"'+text.replaceAll('"','""')+'"';
+}
+function fileDownload(name,type,body) {
+  const url=URL.createObjectURL(new Blob([body],{type}));
+  const anchor=document.createElement('a');
+  anchor.href=url; anchor.download=name;
+  document.body.appendChild(anchor); anchor.click(); anchor.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+function csvFile(name,headers,rows) {
+  check(rows.length>0,'選択期間に出力できる記録がありません。');
+  fileDownload(name,'text/csv;charset=utf-8','\uFEFF'+[headers,...rows].map(row=>row.map(csvCell).join(',')).join('\r\n')+'\r\n');
+}
+function exportCsv(kind) {
+  const [from,until]=bounds(), rows=rowsBetween(from,until,filter.store);
+  const suffix=(sample?'サンプル_':'')+from+'_'+until+'.csv';
+  const state=value=>value?.status==='work'?'出勤':value?'休日':null;
+  const mode=sample?'サンプル':'実データ';
+  if (kind==='daily') {
+    const headers=['データ区分','日付','曜日','店舗','予定区分','予定出勤','予定退勤','予定休憩分','実績区分','実績出勤','実績退勤','実績休憩分',
+      '勤務分','施術入力方式','施術分','待機分','稼働率%','施術件数','フリー件数','個人指名件数','性別指名件数','個人指名率%',
+      '施術売上円','基本料金円毎60分','基本料金換算円','施設利用料率%','施設利用料円毎60分','固定材料費円毎60分','その他控除円毎60分',
+      '個人指名加算円','性別指名加算円','報酬目安円','施術1時間あたり報酬円','出勤1時間あたり報酬円','店舗来店客数','出勤セラピスト人数',
+      'オプション販売件数','オプション売上円','オプション追加報酬円','オプション別内訳','店舗売上円','店舗客単価円'];
+    const s=data().settings, percent=n=>n===null?null:Math.round(n*10000)/100;
+    csvFile('勤務データ_'+suffix,headers,rows.map(r=>{
+      const v=r.totals, {plan,actual}=r;
+      const options=r.visit?.mode==='detail' ? summarizeOptions(v.options) : null;
+      const breakdown=options?.count ? summarizeOptionsByName(v.options).map(([name,item])=>
+        name+'（'+optionLine(item)+'）').join(' ／ ') : null;
+      return [mode,r.date,days[r.dow],storeName(r.store),state(plan),plan?.start,plan?.end,plan?.breaks,
+        state(actual),actual?.start,actual?.end,actual?.breaks,r.work,r.visit?(r.visit.mode==='basic'?'基本':'詳細'):null,v?.minutes,r.waiting,
+        v && r.work ? percent(ratio(v.minutes,r.work)):null,v?.count,v?v.count-v.personal-v.gender:null,v?.personal,v?.gender,
+        v?percent(ratio(v.personal,v.count)):null,v?.sales,s.base,v?Math.round(v.minutes*s.base/60):null,
+        s.feeRates[r.date.slice(0,7)],s.facility,s.material,s.other,v?v.personal*s.personal:null,v?v.gender*s.gender:null,r.pay==null?null:Math.round(r.pay),
+        r.pay!=null && v?.minutes?Math.round(r.breakdown.treatmentNet*60/v.minutes):null,
+        r.pay!=null && r.work?Math.round(r.breakdown.treatmentNet*60/r.work):null,r.traffic?.total,r.traffic?.staff,options?.count,options?.sales,options?.pay,breakdown,
+        r.traffic?.sales,customerSpend(r.traffic)==null?null:Math.round(customerSpend(r.traffic))];
+    }));
+  } else {
+    const headers=['データ区分','日付','曜日','店舗','時間帯','来店時刻記録のあるフリー件数','来店時刻記録のある個人指名件数',
+      '来店時刻記録のある性別指名件数','店舗来店客数'];
+    const out=rows.flatMap(r=>hourly([r]).bins.filter(b=>b.free+b.personal+b.gender || b.trafficCount)
+      .map(b=>[mode,r.date,days[r.dow],storeName(r.store),hourLabel(b.hour),
+        b.free+b.personal+b.gender?b.free:null,b.free+b.personal+b.gender?b.personal:null,b.free+b.personal+b.gender?b.gender:null,
+        b.trafficCount?b.customers:null]));
+    csvFile('時間帯別_'+suffix,headers,out);
+  }
+  notify('CSVを出力しました');
+}
+function exportScreen() {
+  return setHeading('データ出力','現在の分析条件でCSVを保存')+adSlot('export')+filterPanel()+
+    panel('勤務データCSV','<p>日付・店舗ごとの勤務、施術売上、報酬、オプション販売、店舗売上、来店客数、客単価を出力します。</p>'+
+      '<div class="row"><button class="primary" data-csv="daily">勤務CSVを保存</button><button data-csv="hourly">時間帯別CSVを保存</button></div>'+
+      '<p class="sub">時間帯別CSVは日付・店舗・時間帯ごとの来店と指名を集計します。CSVの空欄は未記録または対象外、0は記録されたゼロです。時間あたりの報酬は施術分の控除後です。自由メモは含めません。</p>');
+}
+let settingMonth=month;
+function optionSettingsPanel(settings) {
+  const fields=item=>field('オプション名',input('optionName','text',item?.name,'maxlength="40" required'))+
+    '<div class="split">'+field('販売価格（円）',numeric('optionPrice',item?.price))+
+    field('報酬（円）',numeric('optionPay',item?.share))+'</div>';
+  return panel('オプション設定','<div class="entries" id="optionCatalog">'+settings.options.map(item=>{
+    const amounts='販売 '+yen(item.price)+' ／ 報酬 '+yen(item.share);
+    if (item.id===MATTRESS.id) return '<div class="record"><strong>'+esc(item.name)+'</strong><p class="sub">'+amounts+'（固定）</p></div>';
+    return '<details class="record"><summary>'+esc(item.name)+'</summary><p class="sub">'+amounts+'</p>'+
+      '<form class="optionForm stack" data-option-id="'+esc(item.id)+'">'+fields(item)+
+      '<div class="row"><button type="submit">変更を保存</button><button type="button" class="danger" data-remove-option="'+esc(item.id)+'">削除</button></div></form></details>';
+  }).join('')+'</div><details><summary>＋ オプションを追加</summary><form class="optionForm stack">'+fields()+
+    '<button type="submit" class="primary">オプションを登録</button></form></details>'+
+    '<p class="sub">変更・削除しても、保存済みの施術には記録時の名前と金額が残ります。</p>');
+}
+function settingsScreen() {
+  const s=data().settings;
+  const fieldSetting=(name,label)=>field(label,numeric(name,s[name]));
+  const rates=Object.entries(s.feeRates).sort((a,b)=>b[0].localeCompare(a[0]));
+  return setHeading('設定','報酬・店舗・バックアップを管理')+
+    '<div class="split settings-grid">'+panel('報酬設定',
+      '<form id="paySettings" class="stack"><div class="split">'+fieldSetting('base','基本料金（円／60分）')+
+      fieldSetting('target','目標月間報酬（円、0は未設定）')+fieldSetting('personal','個人指名料（円／件）')+
+      fieldSetting('gender','性別指名加算（円／件）')+'</div>'+
+      '<fieldset><legend>時間あたりの控除（円／60分）</legend><div class="split">'+fieldSetting('facility','施設利用料')+
+      fieldSetting('material','固定材料費')+fieldSetting('other','その他控除')+'</div></fieldset>'+
+      '<button class="primary" type="submit">報酬設定を保存</button></form>')+
+    panel('月別施設利用料率',
+      '<form id="rateSettings" class="stack"><div class="split">'+field('対象月',input('targetMonth','month',settingMonth,'min="1900-01" max="2199-12" required'))+
+      field('施設利用料率（%）',numeric('rate',s.feeRates[settingMonth],100,0,false,.01))+'</div>'+
+      '<p class="sub" id="rateStatus">'+(s.feeRates[settingMonth]==null?'未設定':'設定済み')+' ／ 施術売上から差し引く割合</p>'+
+      '<div class="row"><button class="primary" type="submit">月別施設利用料率を保存</button></div></form>'+
+      (rates.length?'<details><summary>設定済みの月（'+rates.length+'件）</summary>'+table(['対象月','施設利用料率'],rates.map(([m,r])=>tr(cell(m)+ncell(r+'%'))).join(''))+'</details>':
+        '<p class="sub">設定済みの月はありません。</p>'))+'</div>'+
+    optionSettingsPanel(s)+panel('店舗管理','<div class="entries">'+data().stores.map(s=>'<form class="record stack storeForm" data-store-id="'+esc(s.id)+'">'+
+      field('店舗名',input('storeName','text',s.name,'maxlength="30" required'))+'<div class="row"><button type="submit">名前を保存</button>'+
+      '<button type="button" class="danger" data-remove-store="'+esc(s.id)+'">削除</button></div></form>').join('')+'</div>'+
+      '<form id="addStore" class="stack">'+field('追加する店舗名',input('storeName','text','','maxlength="30" required placeholder="例：中央店"'))+
+      '<button type="submit" class="primary">店舗を追加</button></form><p class="sub">記録のある店舗は名前を変更できます。削除する場合は先に該当店舗の記録を削除してください。</p>')+
+    panel('JSONバックアップ・復元','<div class="row"><button id="backup">JSONを保存</button><button id="restore" '+(sample?'disabled':'')+'>JSONから復元</button></div>'+
+      '<input type="file" id="restoreFile" accept=".json,application/json" aria-label="復元するJSON" hidden><p class="sub">'+
+      (sample?'サンプルのJSONを保存できます。実データの復元は実データ画面で行います。':'復元すると現在の記録・店舗・設定を置き換えます。復元前に現在のJSONを保存しておくと戻せます。')+'</p>')+
+    panel('操作ガイド',$('guide').innerHTML);
+}
+function backup() {
+  const envelope={app:KEY,type:sample?'sample':'real',data:data()};
+  fileDownload((sample?'サンプル_':'')+'勤務バックアップ_'+today+'.json','application/json;charset=utf-8',JSON.stringify(envelope,null,2));
+  notify('バックアップを出力しました');
+}
+async function restore(file) {
+  if (!file || sample) return;
+  try {
+    check(file.size<=15*1024*1024,'復元できるJSONは15MBまでです。');
+    const envelope=JSON.parse(await file.text());
+    check(envelope?.app===KEY && envelope.type==='real','この試作版の実データ用JSONを選択してください。');
+    const restored=migrate(envelope.data);
+    validate(restored);
+    check(!sample,'実データ画面で復元してください。');
+    if (!confirm('現在の実データをこのバックアップの内容で置き換えますか？')) return;
+    commit(restored,true);
+    calendarStore='';filter.store='';render();notify('バックアップを復元しました');
+  } catch (error) { notify(error instanceof SyntaxError?'JSONを読み取れません。現在の記録は保持されています。':error.message); }
+}
+function submitSettings(event) {
+  const form=event.target;
+  if (!form.matches('#paySettings,#rateSettings,#addStore,.storeForm,.optionForm')) return;
+  event.preventDefault();
+  const v=fromForm(form), next=clone(data());
+  try {
+    if (form.id==='paySettings') {
+      for (const name of ['base','personal','gender','facility','material','other','target']) next.settings[name]=Number(v[name]);
+    } else if (form.id==='rateSettings') {
+      check(validMonth(v.targetMonth),'対象月を入力してください。');
+      if (v.rate==='') {
+        if (next.settings.feeRates[v.targetMonth]!=null && !confirm('この月の施設利用料率を解除しますか？')) return;
+        delete next.settings.feeRates[v.targetMonth];
+      } else next.settings.feeRates[v.targetMonth]=Number(v.rate);
+      settingMonth=v.targetMonth;
+    } else if (form.matches('.optionForm')) {
+      const optionId=form.dataset.optionId;
+      const name=v.optionName.trim();
+      check(name && name!==MATTRESS.name,'オプション名を確認してください。プレミアムマットレスは登録済みです。');
+      const item={id:optionId??id(),name,price:Number(v.optionPrice),share:Number(v.optionPay)};
+      if (optionId) {
+        const index=next.settings.options.findIndex(entry=>entry.id===optionId);
+        check(index>0,'変更できるオプションを確認してください。');
+        next.settings.options[index]=item;
+      } else next.settings.options.push(item);
+    } else if (form.id==='addStore') {
+      next.stores.push({id:id(),name:v.storeName.trim()});
+    } else next.stores.find(s=>s.id===form.dataset.storeId).name=v.storeName.trim();
+    commit(next);render();notify('保存しました');
+  } catch (error) { notify(error.message); }
+}
+function removeOption(optionId) {
+  const next=clone(data());
+  const index=next.settings.options.findIndex(item=>item.id===optionId);
+  if (index<1 || !confirm('「'+next.settings.options[index].name+'」を選択肢から削除しますか？')) return;
+  try {
+    next.settings.options.splice(index,1);
+    commit(next);render();notify('オプションを削除しました');
+  } catch (error) { notify(error.message); }
+}
+function removeStore(storeId) {
+  try {
+    const next=clone(data());
+    check(next.stores.length>1,'店舗は1件以上必要です。');
+    check(![next.shifts,next.visits,next.traffic].some(map=>Object.values(map).some(r=>r.store===storeId)),'記録がある店舗は削除できません。');
+    if (!confirm('店舗「'+storeName(storeId)+'」を削除しますか？')) return;
+    next.stores=next.stores.filter(s=>s.id!==storeId);
+    commit(next);
+    if (calendarStore===storeId) calendarStore='';
+    if (filter.store===storeId) filter.store='';
+    render();notify('店舗を削除しました');
+  } catch (error) { notify(error.message); }
+}
+function render() {
+  for (const button of document.querySelectorAll('[data-nav]')) {
+    if (button.dataset.nav===tab) button.setAttribute('aria-current','page');
+    else button.removeAttribute('aria-current');
+  }
+  $('sampleToggle').textContent=sample?'実データに戻る':'サンプルを試す';
+  $('modeBanner').hidden=!sample;
+  $('modeBanner').innerHTML=sample?'<strong>サンプル表示中</strong>　架空の記録です。変更はこの画面を開いている間だけ保持します。':'';
+  $('modeBanner').style.marginBottom=sample?'12px':'';
+  $('app').innerHTML=({calendar,analysis,export:exportScreen,settings:settingsScreen})[tab]();
+  $('storageStatus').classList.toggle('error',!!storageProblem && !sample);
+  $('storageStatus').textContent=sample?'サンプルモード':storageProblem||'実データはこのブラウザ内に保存されます。';
+}
+let realView=null;
+$('sampleToggle').addEventListener('click',()=>{
+  if (!sample) {
+    demo=buildDemo();validate(demo);
+    realView={month,selectedDay,calendarStore,filter:{...filter},settingMonth};
+    const m=today.slice(0,7);
+    month=m;selectedDay=today;calendarStore='';settingMonth=m;
+    filter={kind:'month',anchor:today,start:m+'-01',end:monthEnd(m),store:''};
+    sample=true;tab='analysis';
+  } else {
+    ({month,selectedDay,calendarStore,filter,settingMonth}=realView);
+    sample=false;demo=null;
+  }
+  render();$('app').querySelector('h2')?.focus();
+});
+document.querySelector('nav').addEventListener('click',event=>{
+  const button=event.target.closest('[data-nav]');
+  if (!button) return;
+  tab=button.dataset.nav;render();window.scrollTo(0,0);$('app').querySelector('h2')?.focus();
+});
+$('app').addEventListener('click',event=>{
+  const button=event.target.closest('button');
+  if (!button || button.type==='submit' && button.form) return;
+  const d=button.dataset;
+  if (d.analysisView) {
+    if (analysisView===d.analysisView) return;
+    analysisView=d.analysisView;
+    render();
+    $('app').querySelector('[aria-pressed="true"]').focus({preventScroll:true});
+  } else if (d.day) {
+    selectedDay=d.day;render();
+    const focus=$('selectedDayTitle');
+    if (matchMedia('(max-width: 760px)').matches) { focus.scrollIntoView({block:'start'});focus.focus({preventScroll:true}); }
+    else $('app').querySelector('[data-day="'+selectedDay+'"]').focus();
+  } else if (d.month) {
+    const next=d.month==='today'?today.slice(0,7):monthOffset(month,Number(d.month));
+    if (!validMonth(next)) return;
+    month=next;selectedDay=d.month==='today'?today:month+'-01';render();
+    $('app').querySelector('[data-month="'+d.month+'"]').focus();
+  } else if (d.edit) openEditor(d.edit,d.store,d.layer);
+  else if (d.csv) { try { exportCsv(d.csv); } catch (error) { notify(error.message); } }
+  else if (d.removeStore) removeStore(d.removeStore);
+  else if (d.removeOption) removeOption(d.removeOption);
+  else if (button.id==='backup') backup();
+  else if (button.id==='restore') $('restoreFile').click();
+});
+$('app').addEventListener('submit',submitSettings);
+$('app').addEventListener('change',event=>{
+  const {name,value,id}=event.target;
+  if (id==='restoreFile') { restore(event.target.files[0]);event.target.value='';return; }
+  if (name==='calendarStore') calendarStore=value;
+  else if (name==='filterStore') filter.store=value;
+  else if (name==='period') {
+    if (value==='custom') [filter.start,filter.end]=bounds();
+    filter.kind=value;
+  } else if (name==='anchor' || name==='filterStart' || name==='filterEnd') {
+    if (!validDate(value)) { notify('有効な日付を選択してください。');render();return; }
+    if (name==='anchor') filter.anchor=value;
+    if (name==='filterStart') { filter.start=value;if(value>filter.end) filter.end=value; }
+    if (name==='filterEnd') { filter.end=value;if(value<filter.start) filter.start=value; }
+  } else if (name==='targetMonth') {
+    if (!validMonth(value)) return;
+    settingMonth=value;
+    const rate=data().settings.feeRates[value];
+    event.target.form.elements.rate.value=rate??'';
+    $('rateStatus').textContent=(rate==null?'未設定':'設定済み')+' ／ 施術売上から差し引く割合';
+    return;
+  } else return;
+  const scroll=window.scrollY;
+  render();
+  $('app').querySelector('[name="'+name+'"]')?.focus({preventScroll:true});
+  window.scrollTo(0,scroll);
+});
+$('editorForm').addEventListener('submit',saveEditor);
+$('closeEditor').addEventListener('click',()=> $('editor').close());
+$('editor').addEventListener('close',()=>{editing=null;});
+$('deleteRecord').addEventListener('click',removeRecord);
+function addDetail() {
+  const box=$('detailRows');
+  if (box.children.length>=250) {showFormError('詳細は最大250件です。');return;}
+  box.insertAdjacentHTML('beforeend',detailRow({minutes:'',sales:'',kind:'free',time:'',memo:''},box.children.length));
+  box.lastElementChild.querySelector('input').focus();
+}
+$('editorBody').addEventListener('click',event=>{
+  if (event.target.id==='addDetail') addDetail();
+  if (event.target.closest('[data-remove-detail]')) {
+    event.target.closest('.detail-entry').remove();
+    [...$('detailRows').children].forEach((child,i)=>{
+      child.querySelector('strong').textContent='施術 '+(i+1);
+      child.querySelector('[data-remove-detail]').setAttribute('aria-label','施術 '+(i+1)+' を外す');
+    });
+    $('addDetail').focus();
+  }
+});
+$('editorBody').addEventListener('input',event=>{
+  const field=event.target;
+  if (!field.hasAttribute('data-clock')) return;
+  const digits=value=>value.replace(/[０-９]/g,c=>String(c.charCodeAt(0)-0xff10)).replace(/[^0-9]/g,'');
+  const cursor=digits(field.value.slice(0,field.selectionStart)).length;
+  const value=digits(field.value);
+  const formatted=value.length===4 ? value.slice(0,2)+':'+value.slice(2) : value;
+  if (formatted!==field.value) {
+    field.value=formatted;
+    const position=cursor+(value.length===4 && cursor>2 ? 1 : 0);
+    field.setSelectionRange(position,position);
+  }
+  field.setCustomValidity(!value || clockOK(formatted) ? '' : '時刻は0000〜2359の範囲で、分が00〜59となる4桁を入力してください。');
+});
+$('editorBody').addEventListener('change',event=>{
+  const {name,value}=event.target;
+  const visible=(target,show)=>{ const el=$(target);el.hidden=!show;el.disabled=!show; };
+  if (name==='status') visible('workFields',value==='work');
+  if (name==='mode') {
+    visible('basicFields',value==='basic');
+    visible('detailFields',value==='detail');
+    if (value==='detail' && !$('detailRows').children.length) addDetail();
+  }
+});
+render();
+</script>
+</body>
+</html>
