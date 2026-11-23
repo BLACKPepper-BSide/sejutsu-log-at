@@ -39,39 +39,17 @@ dialog{width:min(640px,calc(100% - 24px));max-height:calc(100dvh - 30px);padding
 <nav aria-label="メインメニュー"><div class="wrap">
 <button data-nav="calendar">カレンダー</button><button data-nav="analysis">分析</button><button data-nav="export">データ出力</button><button data-nav="settings">設定</button>
 </div></nav>
-<main class="wrap"><div id="modeBanner" class="banner" hidden></div><div id="app" class="stack"></div><p id="storageStatus" class="local-status"></p><p id="appVersion" class="local-status" hidden>Ver.1.4</p></main>
+<main class="wrap"><div id="modeBanner" class="banner" hidden></div><div id="app" class="stack"></div><p id="storageStatus" class="local-status"></p><p id="appVersion" class="local-status" hidden>Ver.1.5</p></main>
 <p id="toast" role="status" aria-live="polite"></p>
 <dialog id="editor" aria-labelledby="editorTitle"><form id="editorForm"><div class="dialog-head row between"><h2 id="editorTitle"></h2><button type="button" id="closeEditor" aria-label="編集を閉じる">閉じる</button></div><div id="editorBody" class="dialog-body stack"></div><div class="dialog-foot stack"><p id="formError" class="error" role="alert" hidden></p><div class="row between"><button id="deleteRecord" class="danger" type="button" hidden>削除</button><button class="primary" type="submit" id="saveRecord">保存</button></div></div></form></dialog>
-<template id="guide"><details><summary>使い方・試作の制限</summary><div class="stack">
+<template id="guide"><details><summary>使い方・注意事項</summary><div class="stack">
 <p class="note">GalaxyではHTMLをダウンロードし、「マイファイル」のダウンロードから開きます。アプリを選べる場合はブラウザを選択します。同じブラウザ・同じファイルで開き直してください。</p>
 <ol><li>「設定 → サンプルデータを追加」で架空の記録を表示できます。「設定 → 実データに戻る」で自分の記録に切り替わります。</li><li>設定で店舗名、対象月の施設利用料率、指名料・控除を設定します。</li><li>カレンダーの日付を選び、出勤予定・勤務実績・施術・店舗データを登録します。休日は予定と実績にそれぞれ登録できます。各フォームの保存・削除はその場で端末内に反映されます。</li><li>分析で対象日、期間、店舗を選びます。データ出力で同じ条件のCSVを保存できます。設定でJSONバックアップを作成・復元できます。</li></ol>
 <p class="note">勤務は同じ日・店舗につき予定と実績が各1枠。日またぎは出勤日で集計します。待機時間は勤務時間（休憩を除く）から施術時間を引いた目安です。施術未入力の出勤日は、稼働率・待機の集計対象外です。施術ゼロの日は基本入力で0を保存してください。</p>
 <p class="note">時間帯の分析は詳細入力の来店時刻と手入力した店舗の時間帯別来店客数を集計します。勤務時間帯の提案は来店が記録された時間帯の傾向を表示します。設定変更は過去の報酬目安にも反映されます。</p>
 <p class="note">端末間の同期、予約連携、既存の施術ログからの取込は対象外です。ブラウザやHTMLファイルの置き場所を変えると保存済みデータを読み込めない場合があります。移動前にJSONを保存してください。自由メモにはお客様を特定できる情報を入力しないでください。CSVには自由メモを含めません。</p>
 </div></details>
-<details><summary>Ver.1.1の追加機能</summary><div class="stack">
-<p>来店・出勤・退勤時刻は「1430」のように入力すると「14:30」になります。来店時刻は空欄でも保存できます。オプションは設定で追加し、施術の詳細入力で複数選べます。</p>
-<p>オプションの名前・金額は施術ごとに保存します。集計は分析の「オプション販売」と勤務CSVで確認できます。店舗売上・来店客数は確認できたものだけ入力できます。</p>
-<p>旧試作のJSONを復元できます。旧版の報酬率は100%から引いて施設利用料率に換算します。</p>
-</div></details>
-<details><summary>Ver.1.3の変更</summary><p>時間あたりの報酬は施術分で計算し、指名とオプションは報酬の内訳に表示します。稼働率は施術と勤務の合計時間から計算します。</p></details>
-<details><summary>Ver.1.2の変更</summary><p>分析ページ上部で「自分の分析」と「店舗分析」を切り替えられます。勤務の指標は控除前の金額を主表示にし、控除後の金額も表示します。</p></details>
-<details><summary>試用後の改善チェックリスト</summary><div class="stack"><ul>
-<li>スマホで勤務を1日分入力・修正するまで、何秒かかった？ 迷った項目は？</li>
-<li>基本入力と詳細入力のどちらを普段使いしたい？ 併用したい場面は？</li>
-<li>施術売上・基本料金・報酬目安の違いが画面から伝わる？ 精算明細との差は？</li>
-<li>予定と実績、休日と未入力日、複数店舗の切り替えを見分けられる？</li>
-<li>店舗データのうち、無理なく毎日記録できる項目は？</li>
-<li>次のシフトを決めるときに見たい数字はどれ？ 不足していた根拠は？</li>
-<li>Galaxyでファイルを開き直し、データの保持、CSV保存、JSON復元までできた？</li>
-</ul></div></details>
-<details><summary>Ver.1の検証結果</summary><ul>
-<li>Chromeで、予定・勤務実績の登録／編集／削除、休日表示、曜日別の一括登録と既存予定のスキップを確認。</li>
-<li>基本・詳細の切り替えで二重計上がないこと、店舗データと指名3区分の集計、期間・店舗の絞り込みを確認。</li>
-<li>施術売上7,200円・報酬率70%・個人指名250円・性別指名100円・施術2時間・控除320円／時で、報酬目安4,750円になることを確認。</li>
-<li>サンプルのグラフと提案、日別・時間帯別CSV、JSON保存と復元、不正JSONを読み込んだ後のデータ保持を確認。</li>
-<li>ブラウザ再読み込み後のデータ保持と、360px幅での下部ナビ・横はみ出し・主要フォーム操作を確認。Galaxy S25実機は未確認。</li>
-</ul></details></template>
+</template>
 <script>
 'use strict';
 
