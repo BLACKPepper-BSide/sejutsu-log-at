@@ -988,7 +988,7 @@ function settingsScreen() {
     panel('サンプルデータ',sample?
       '<button id="returnToReal" type="button">実データに戻る</button>':
       '<button id="addSample" type="button">サンプルデータを追加</button>')+
-    panel('操作ガイド',$('guide').innerHTML+'<p><a href="https://blackpepper-bside.github.io/#privacy">プライバシーポリシー</a></p>');
+    panel('操作ガイド',$('guide').innerHTML+'<p><a href="https://blackpepper-bside.github.io/#privacy">プライバシーポリシー</a></p><p class="local-status">© 2026 B面（Bside）｜<a href="https://blackpepper-bside.github.io/terms.html">利用規約</a></p>');
 }
 function backup() {
   const envelope={app:KEY,type:sample?'sample':'real',data:data()};
